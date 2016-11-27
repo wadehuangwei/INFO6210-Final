@@ -11,12 +11,11 @@ create table UserAccount(
 	Street                 nvarchar(40)          not null,
 	City                   nvarchar(40)          not null,
 	State                  nvarchar(40)          not null,
-    Country                nvarchar(40)          not null,
 	Zipcode                nvarchar(20)          not null,   
 	Phone                  nvarchar(20)          not null,
+    Email                  nvarchar(40)          not null,
 	AccountType            nvarchar(40)          not null,
-    primary key (UserID),
-    unique(UserID)
+    primary key (UserID)
 );
 
 /*==============================================================*/
@@ -39,9 +38,8 @@ create table Hospital(
 	Street                 nvarchar(40)          not null,
 	City                   nvarchar(40)          not null,
 	State                  nvarchar(40)          not null,
-    Country                nvarchar(40)          not null,
 	Zipcode                nvarchar(20)          not null, 
-    DateOfEstablishment    date                  null,
+    HospitalOwnership      nvarchar(40)          not null, 
     primary key (HospitalID)
 );
 
@@ -82,15 +80,27 @@ create table HealthRecord(
 );
 
 /*==============================================================*/
+/* Table: Drug                                           */
+/*==============================================================*/
+create table Drug(
+	DrugID                 int                   not null auto_increment,
+    DrugName               nvarchar(40)          not null,
+    SymphtomID             int                   not null,
+    primary key (DrugID),
+    foreign key (SymphtomID) references Symphtom(SymphtomID)
+);
+
+/*==============================================================*/
 /* Table: Prescription                                          */
 /*==============================================================*/
 create table Prescription(
 	PrescriptionID          int                   not null auto_increment,
-    DoctorID                int                   not null,
-    DrugID                  nvarchar(40)          null,
-    PrescriptionDescription nvarchar(80)          not null,
+    DoctorID                int                   null,
+    DrugID                  int                   null,
+    PrescriptionDescription nvarchar(80)          null,
     primary key (PrescriptionID),
-    foreign key (DoctorID) references Doctor(DoctorID)
+    foreign key (DoctorID) references Doctor(DoctorID),
+    foreign key (DrugID) references Drug(DruID)
 );
 
 /*==============================================================*/
@@ -119,7 +129,6 @@ create table Device(
     primary key (DeviceType)
 );
 
-
 /*==============================================================*/
 /* Table: Disease                                           */
 /*==============================================================*/
@@ -132,17 +141,6 @@ create table Disease(
     foreign key (SymphtomID) references Symphtom(SymphtomID),
     foreign key (PrescriptionID) references Prescription(PrescriptionID),
     foreign key (DeviceType) references Device(DeviceType)
-);
-
-/*==============================================================*/
-/* Table: Drug                                           */
-/*==============================================================*/
-create table Drug(
-	DrugID                 int                   not null auto_increment,
-    DrugName               nvarchar(40)          not null,
-    SymphtomID             int                   not null,
-    primary key (DrugID),
-    foreign key (SymphtomID) references Symphtom(SymphtomID)
 );
 
 /*==============================================================*/
