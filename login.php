@@ -1,23 +1,23 @@
+
 <?php
 session_start();
-
 //connect to database
-$db = mysqli_connect("localhost", "root", "", "authentication");
+$db = mysqli_connect("localhost", "root", "", "healthcare");
 
 if (isset($_POST['login_btn']))
 {
-	$username = mysql_real_escape_string($_POST['username']);
-	$password = mysql_real_escape_string($_POST['password']);
+  $username = mysql_real_escape_string($_POST['username']);
+  $password = mysql_real_escape_string($_POST['password']);
 
     $password = md5($password); //remember we hased password before string last time
-    $sql = "SELECT * FROM users WHERE username ='$username' AND password ='$password'";
+    $sql = "SELECT * FROM useraccount WHERE username ='$username' AND password ='$password'";
     $result = mysqli_query($db,$sql);
 
     if(mysqli_num_rows($result) == 1){
         $_SESSION['message'] = "You are now logged in";
         $_SESSION['username'] = $username;
 
-        header("location: home.php"); //redirect to home page
+        header("location: homePage.php"); //redirect to home page
 
     } else
     {
@@ -25,15 +25,15 @@ if (isset($_POST['login_btn']))
         $_SESSION['message'] = "Username/password combination incorrect";
 
     }
-}	
+} 
 
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Register, login and logout user php mysql</title>
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <title>Register, login and logout user php mysql</title>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>     
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
@@ -41,9 +41,12 @@ if (isset($_POST['login_btn']))
 </head>
 
 <style>
-
+body{
+/*  background-color: #f1f1f1;
+*/}
 form {
     border: 3px solid #f1f1f1;
+    background-color: white;
 }
 
 input[type=text] {
@@ -100,83 +103,28 @@ span.psw {
        width: 100%;
     }
 }
+
+footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+
 </style>
 
 <body>
 
+<div class="jumbotron">
+  <div class="container text-center">
+    <h1>Intelligent Healthcare Guiding System</h1>      
+    <p>Mission, Vission & Values</p>
+  </div>
+</div>
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">Quant University</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="about.html">About</a>
-                    </li>
-                    <li>
-                        <a href="lessonsHome.html">Courses</a>
-                    </li>
-                    <li>
-                        <a href="WhitePaperHome.html">White Papers</a>
-                    </li>
-                    <li>
-                        <a href="presentationHome.html">Presentations</a>
-                    </li>
-                    
-
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="blog-home-1.html">Blog Home 1</a>
-                            </li>
-                            
-<!--                             <li>
-                                <a href="blog-home-2.html">Blog Home 2</a>
-                            </li> -->
-                            <li>
-                                <a href="blog-post.html">Blog Post</a>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-
-<br>
-<br>
 <div class="container">
-    <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">User Account
-                    <small>Log In</small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="index.html">Home</a>
-                    </li>
-                    <li class="active">Log In</li>
-                </ol>
-            </div>
-        </div>
 
 <div class="col-md-3">
 
 </div>
-
 
 <div class="col-md-6"> 
 
@@ -188,14 +136,14 @@ span.psw {
     }
  
 ?>
-                    
-                    <form method="post" action="login.php">
+
+<form method="post" action="login.php">
 
                     <div class="container1">
                      <img src="register.jpg" alt="Avatar" class="avatar" height="200" >
                     </div>
 
-                    <div class="container1">	
+                    <div class="container1">  
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Username:</label>
@@ -219,9 +167,17 @@ span.psw {
                     <span class="psw">New User? |<a href="register.php">  Register</a></span>
                     </div>
 
-                    </form>
+</form>
 </div>
 
 </div>
+<br>
+<br>
+
+<footer class="container-fluid text-center">
+  <p>Online Store Copyright</p>  
+  
+</footer>
+
 </body>
 </html>

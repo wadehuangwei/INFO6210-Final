@@ -6,6 +6,8 @@ use healthcare;
 /*==============================================================*/
 create table UserAccount(
 	UserID                 int                   not null auto_increment,
+    Username               nvarchar(40)          not null,
+    Password               nvarchar(40)          not null,
 	FirstName              nvarchar(40)          not null,
 	LastName               nvarchar(40)          not null,
 	Street                 nvarchar(40)          not null,
