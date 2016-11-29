@@ -100,7 +100,7 @@ create table Prescription(
     PrescriptionDescription nvarchar(80)          null,
     primary key (PrescriptionID),
     foreign key (DoctorID) references Doctor(DoctorID),
-    foreign key (DrugID) references Drug(DruID)
+    foreign key (DrugID) references Drug(DrugID)
 );
 
 /*==============================================================*/
