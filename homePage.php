@@ -168,7 +168,7 @@ $(document).ready( function() {
                 
       </div><!-- End Carousel Inner -->
 
-<a href='healthRecordPage.php'>Health Record</a></br>
+<a href='healthRecords.php'>Health Record</a></br>
 <a href='requestRecords.php'>My Medical Requests</a></br>
 <a href='request.php'>Initiate a Medical Request</a></br>
       <ul class="nav nav-pills nav-justified">
