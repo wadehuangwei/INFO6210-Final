@@ -168,10 +168,12 @@ $(document).ready( function() {
                 
       </div><!-- End Carousel Inner -->
 
-
+<a href='healthRecordPage.php'>Health Record</a></br>
+<a href='requestRecords.php'>My Medical Requests</a></br>
+<a href='request.php'>Initiate a Medical Request</a></br>
       <ul class="nav nav-pills nav-justified">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#">About<small>Lorem ipsum dolor sit</small></a></li>
-          <li data-target="#myCarousel" data-slide-to="1"><a href="#">Projects<small>Lorem ipsum dolor sit</small></a></li>
+          <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="healthRecordPage.php">Health Record Page<small>Lorem ipsum dolor sit</small></a></li>
+          <li data-target="#myCarousel" data-slide-to="1"><a href='healthRecordPage.php'>Initiate a request<small>Lorem ipsum dolor sit</small></a></li>
           <li data-target="#myCarousel" data-slide-to="2"><a href="#">Portfolio<small>Lorem ipsum dolor sit</small></a></li>
           <li data-target="#myCarousel" data-slide-to="3"><a href="#">Services<small>Lorem ipsum dolor sit</small></a></li>
         </ul>
