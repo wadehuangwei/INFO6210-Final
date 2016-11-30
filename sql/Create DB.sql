@@ -100,9 +100,11 @@ create table Prescription(
     DoctorID                int                   null,
     DrugID                  int                   null,
     PrescriptionDescription nvarchar(80)          null,
+    DiseaseID               int                   not null,
     primary key (PrescriptionID),
     foreign key (DoctorID) references Doctor(DoctorID),
-    foreign key (DrugID) references Drug(DrugID)
+    foreign key (DrugID) references Drug(DrugID),
+    foreign key (DiseaseID) references Disease(DiseaseID)
 );
 
 /*==============================================================*/
@@ -125,6 +127,7 @@ create table MedicalRecord(
 /* Table: Device                                          */
 /*==============================================================*/
 create table Device(
+    DeviceID               int                   not null auto_increment,
 	DeviceType             nvarchar(40)          not null,
     DevicePrice            decimal(12,2)         null,
     DeviceInventory        int                   not null,
@@ -135,6 +138,7 @@ create table Device(
 /* Table: Disease                                           */
 /*==============================================================*/
 create table Disease(
+    DiseaseID              int                   not null auto_increment,
 	DiseaseName            nvarchar(40)          not null,
     SymphtomID             int                   not null,
     PrescriptionID         int                   not null,
@@ -176,6 +180,7 @@ create table Diagnosis(
 /* Table: Supplier                                       */
 /*==============================================================*/
 create table Supplier(
+    SupplierID             int                   not null auto_increment,
 	SupplierName           nvarchar(40)          not null,
     Street                 nvarchar(40)          not null,
 	City                   nvarchar(40)          not null,
@@ -201,7 +206,9 @@ create table Supply(
 /* Table: Warehouse                                        */
 /*==============================================================*/
 create table Warehouse(
+    WarehouseID            int                   not null auto_increment,
 	WarehouseName          nvarchar(40)          not null,
+    Capacity               int                   not null,
     Street                 nvarchar(40)          not null,
 	City                   nvarchar(40)          not null,
 	State                  nvarchar(40)          not null,
