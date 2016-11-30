@@ -5,7 +5,7 @@ require_once 'vendor/autoload.php';
 $provider = new Fitbit([
     'clientId'          => '227XBX',
     'clientSecret'      => '3b97686387de01d61fc1ce998cc0f4e4',
-    'redirectUri'       => 'http://localhost/INFO6210-Final/healthRecordPage.php'
+    'redirectUri'       => 'http://localhost/INFO6210-Final/healthRecords.php'
 ]);
 
 // start the session
