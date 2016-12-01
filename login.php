@@ -21,7 +21,6 @@ if (isset($_POST['login_btn']))
 
     } else
     {
-
         $_SESSION['message'] = "Username/password combination incorrect";
 
     }
@@ -104,14 +103,9 @@ span.psw {
     }
 }
 
-footer {
-      background-color: #f2f2f2;
-      padding: 25px;
-    }
-
 </style>
 
-<body>
+<body ng-app="">
 
 <div class="jumbotron">
   <div class="container text-center">
@@ -174,10 +168,8 @@ footer {
 <br>
 <br>
 
-<footer class="container-fluid text-center">
-  <p>Online Store Copyright</p>  
-  
-</footer>
+<div ng-include="'footer.html'"></div>
+
 
 </body>
 </html>

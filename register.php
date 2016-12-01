@@ -91,11 +91,6 @@ span.psw {
     padding-top: 16px;
 }
 
-footer {
-      background-color: #f2f2f2;
-      padding: 25px;
-    }
-
 
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
@@ -108,7 +103,8 @@ footer {
     }
 }
 </style>
-<body>
+
+<body ng-app="">
 
 <div class="jumbotron">
   <div class="container text-center">
@@ -187,9 +183,8 @@ footer {
 
 <br>
 <br>
-<footer class="container-fluid text-center">
-  <p>Online Store Copyright</p>  
-</footer>
+<div ng-include="'footer.html'"></div>
+
 
 </body>
 </html>
