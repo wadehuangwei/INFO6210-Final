@@ -230,5 +230,12 @@ create table Inventory(
     foreign key (WarehouseName) references Warehouse(WarehouseName)
 );
 
+create table DeviceDelivery(
+	DeviceID               int                   not null,
+    ShipDate               nvarchar(40)          not null,
+    primary key (DeviceID),
+    foreign key (DeviceID) references Device(DeviceID)
+);
+
 
 
