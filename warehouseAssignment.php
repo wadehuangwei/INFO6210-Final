@@ -48,6 +48,7 @@ if(mysqli_num_rows($result) == 1){
             }
         }
         if(!empty($maxID)){
+            $maxID = mysql_real_escape_string($maxID);
         	$sql_update = "UPDATE Patient SET ClosestWarehouse = '$maxID' WHERE PatientID = '$patientID'";
         	$result_update = $conn->query($sql_update);
         }
