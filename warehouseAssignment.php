@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 $servername = "localhost";
 $username = "root";
@@ -101,4 +102,5 @@ function GetDrivingDistance($lat1, $lat2, $long1, $long2)
 
     return array('distance' => $dist, 'time' => $time);
 }
+
 ?>
