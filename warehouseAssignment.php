@@ -18,7 +18,7 @@ $sql = "SELECT UserAccount.Street, UserAccount.City, UserAccount.State FROM Pati
 $result = $conn->query($sql);
 
 if(mysqli_num_rows($result) == 1){
-        $row = mysql_fetch_array($result);
+        $row = mysqli_fetch_assoc($result);
         $street = $row['Street'];
         $city = $row['City'];
         $state = $row['State'];
@@ -27,7 +27,7 @@ if(mysqli_num_rows($result) == 1){
 
         $sql_wh = "SELECT WarehouseID, Street, City, State FROM Warehouse";
         $result_wh = $conn->query($sql_wh);
-        while($row_wh = mysql_fetch_array($result_wh)){
+        while($row_wh = mysqli_fetch_assoc($result_wh)){
         	$street_wh = $row_wh['Street'];
             $city_wh = $row_wh['City'];
             $state_wh = $row_wh['State'];
