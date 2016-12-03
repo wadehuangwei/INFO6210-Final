@@ -14,21 +14,26 @@
     }
 
     $patientID = mysql_real_escape_string($_SESSION['username']);
-    $sql = "SELECT UserAccount.Street, UserAccount.City, UserAccount.State FROM Patient INNER JOIN UserAccount ON Patient.PatientID = UserAccount.UserID WHERE Patient.PatientID = '$PatientID' LIMIT 1";
-    $result = $conn->query($sql);
-    $row = mysqli_fetch_assoc($result);
-    $street = $row['Street'];
-    $city = $row['City'];
-    $state = $row['State'];
+    $sql_addr = "SELECT Address.Street, Address.City, Address.State FROM Address INNER JOIN UserAccount ON Address.AddressID = UserAccount.AddressID WHERE UserAccount.Username = '$patientID' LIMIT 1";
+    $result_addr = $conn->query($sql_addr);
+    $row_addr = mysqli_fetch_assoc($result_addr);
+    $street = $row_addr['Street'];
+    $city = $row_addr['City'];
+    $state = $row_addr['State'];
     $coordinates1 = get_coordinates($city, $street, $state);
 
-    $sql_wh = "SELECT Warehouse.Street, Warehouse.City, Warehouse.State FROM Patient INNER JOIN Warehouse ON Patient.ClosestWarehouse = Warehouse.WarehouseID WHERE Patient.PatientID = '$PatientID' LIMIT 1";
+    $sql_wh = "SELECT NearestWarehouseID FROM Patient WHERE PatientID = '$patientID'";
     $result_wh = $conn->query($sql_wh);
     $row_wh = mysqli_fetch_assoc($result_wh);
-    $street_wh = $row_wh['Street'];
-    $city_wh = $row_wh['City'];
-    $state_wh = $row_wh['State'];
-    $coordinates2 = get_coordinates($city_wh, $street_wh, $state_wh);
+    $nearestWarehouseID = $row_wh['NearestWarehouseID'];
+
+    $sql_whaddr = "SELECT Address.Street, Address.City, Address.State FROM Address INNER JOIN Warehouse ON Warehouse.AddressID = Address.AddressID WHERE Warehouse.WarehouseID = '$nearestWarehouseID' LIMIT 1";
+    $result_whaddr = $conn->query($sql_whaddr);
+    $row_whaddr = mysqli_fetch_assoc($result_whaddr);
+    $street_whaddr = $row_whaddr['Street'];
+    $city_whaddr = $row_whaddr['City'];
+    $state_whaddr = $row_whaddr['State'];
+    $coordinates2 = get_coordinates($city_whaddr, $street_whaddr, $state_whaddr);
 
     function get_coordinates($city, $street, $province)
     {
@@ -56,9 +61,12 @@
     }
     }
 
-    //get deviceID from patient
-    //get DeliveryDate from device delivery
-    //need more queries here
+    
+    $deviceID = mysql_real_escape_string($_GET['deviceID']);
+    $sql_device = "SELECT ShipDate FROM DeviceDelivery WHERE DeviceID = '$deviceID'";
+    $result_device = $conn->query($sql_device);
+    $row_device = mysqli_fetch_assoc($result_device);
+    $shipDate = $row_device['ShipDate'];
 
    //clock
 
