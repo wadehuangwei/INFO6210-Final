@@ -2,6 +2,19 @@ create database healthcare;
 use healthcare;
 
 /*==============================================================*/
+/* Table: Address                                        */
+/*==============================================================*/
+create table Address(
+	AddressID				int						not null auto_increment,
+	Street					nvarchar(40)			not null,
+	City					nvarchar(40)			not null,
+	State					nvarchar(40)			not null,
+	Country					nvarchar(40)			not null,
+	Zipcode					nvarchar(20)			not null, 
+	primary key (AddressID)
+);
+
+/*==============================================================*/
 /* Table: UserAccount                                              */
 /*==============================================================*/
 create table UserAccount(
@@ -37,7 +50,7 @@ create table Hospital(
 	HospitalName			nvarchar(40)			not null,
 	HospitalOwnership		nvarchar(40)			not null, 
 	AddressID				int 					not null,
-	primary key (HospitalID)
+	primary key (HospitalID),
 	foreign key (AddressID) references Address(AddressID)
 );
 
@@ -89,34 +102,13 @@ create table Drug(
 );
 
 /*==============================================================*/
-/* Table: Prescription                                          */
+/* Table: DeviceType                                         */
 /*==============================================================*/
-create table Prescription(
-	PrescriptionID			int						not null auto_increment,
-	DoctorID				int						null,
-	DrugID					int						null,
-	PrescriptionDescription	nvarchar(80)			null,
-	DiseaseID				int						not null,
-	primary key (PrescriptionID),
-	foreign key (DoctorID) references Doctor(DoctorID),
-	foreign key (DrugID) references Drug(DrugID),
-	foreign key (DiseaseID) references Disease(DiseaseID)
-);
-
-/*==============================================================*/
-/* Table: MedicalRecord                                           */
-/*==============================================================*/
-create table MedicalRecord(
-	MedicalRecordNumber		int						not null auto_increment,
-	PatientID				int						not null,
-	SymphtomID				int						null,
-	PrescriptionID			int						null,
-	DateOfDiagnosis			date					null,
-	Treatmentresult			nvarchar(20)			null, 
-	primary key (MedicalRecordNumber),
-	foreign key (PatientID) references Patient(PatientID),
-	foreign key (SymphtomID) references Symphtom(SymphtomID),
-	foreign key (PrescriptionID) references Prescription(PrescriptionID)
+create table DeviceType(
+	DeviceTypeID			int						not null auto_increment,
+	Description				nvarchar(40)			not null,
+	Usages					nvarchar(40)			null,
+	primary key (DeviceTypeID)
 );
 
 /*==============================================================*/
@@ -124,10 +116,11 @@ create table MedicalRecord(
 /*==============================================================*/
 create table Device(
 	DeviceID				int						not null auto_increment,
-	DeviceType				nvarchar(40)			not null,
+	DeviceTypeID			int 					not null,
 	DevicePrice				decimal(12,2)			null,
 	DeviceInventory			int						not null,
-	primary key (DeviceType)
+	primary key (DeviceID),
+	foreign key (DeviceTypeID) references DeviceType(DeviceTypeID)
 );
 
 /*==============================================================*/
@@ -137,12 +130,37 @@ create table Disease(
 	DiseaseID				int						not null auto_increment,
 	DiseaseName				nvarchar(40)			not null,
 	SymphtomID				int						not null,
-	PrescriptionID			int						not null,
-	DeviceType				nvarchar(40)			not null,
-	primary key (DiseaseName),
+	DeviceID				int						not null,
+	primary key (DiseaseID),
 	foreign key (SymphtomID) references Symphtom(SymphtomID),
-	foreign key (PrescriptionID) references Prescription(PrescriptionID),
-	foreign key (DeviceType) references Device(DeviceType)
+	foreign key (DeviceID) references Device(DeviceID)
+);
+
+/*==============================================================*/
+/* Table: Prescription                                          */
+/*==============================================================*/
+create table Prescription(
+	PrescriptionID			int						not null auto_increment,
+	DoctorID				int						null,
+	PrescriptionDescription	nvarchar(80)			null,
+	DiseaseID				int						not null,
+	primary key (PrescriptionID),
+	foreign key (DoctorID) references Doctor(DoctorID),
+	foreign key (DiseaseID) references Disease(DiseaseID)
+);
+
+/*==============================================================*/
+/* Table: MedicalRecord                                           */
+/*==============================================================*/
+create table MedicalRecord(
+	MedicalRecordNumber		int						not null auto_increment,
+	PatientID				int						not null,
+	PrescriptionID			int						null,
+	DateOfRequest			datetime				null,
+	Treatmentresult			nvarchar(40)			null,
+	primary key (MedicalRecordNumber),
+	foreign key (PatientID) references Patient(PatientID),
+	foreign key (PrescriptionID) references Prescription(PrescriptionID)
 );
 
 /*==============================================================*/
@@ -150,10 +168,37 @@ create table Disease(
 /*==============================================================*/
 create table Test(
 	TestNumber				int						not null auto_increment,
+	PatientID				int 					not null,
+	DeviceID				int 					not null,
+	PrescriptionID			int 					not null,
 	DeviceType				nvarchar(40)			not null,
-	TestResult				nvarchar(80)			not null,
+	TestResult				nvarchar(80)			null,
 	primary key (TestNumber),
-	foreign key (DeviceType) references Device(DeviceType) 
+	foreign key (PatientID) references Patient(PatientID),
+	foreign key (DeviceID) references Device(DeviceID),
+	foreign key (PrescriptionID) references Prescription(PrescriptionID)
+);
+
+/*==============================================================*/
+/* Table: MedicalReordHasTest                                          */
+/*==============================================================*/
+create table MedicalReordHasTest(
+	MedicalRecordNumber		int						not null,
+	TestNumber				int						not null,
+	primary key (MedicalRecordNumber, TestNumber),
+	foreign key (MedicalRecordNumber) references MedicalRecord(MedicalRecordNumber),
+	foreign key (TestNumber) references Test(TestNumber)
+);
+
+/*==============================================================*/
+/* Table: Therapy                                           */
+/*==============================================================*/
+create table Therapy(
+	DiseaseID				int						not null auto_increment,
+	DrugID					int						not null,
+	primary key (DiseaseID, DrugID),
+	foreign key (DiseaseID) references Disease(DiseaseID),
+	foreign key (DrugID) references Drug(DrugID)
 );
 
 /*==============================================================*/
@@ -179,20 +224,20 @@ create table Supplier(
 	SupplierID				int						not null auto_increment,
 	SupplierName			nvarchar(40)			not null,
 	AddressID 				int						not null,
-	foreign key (AddressID) references Address(AddressID)
-	primary key (SupplierName)
+	foreign key (AddressID) references Address(AddressID),
+	primary key (SupplierID)
 );
 
 /*==============================================================*/
 /* Table: Supply                                        */
 /*==============================================================*/
 create table Supply(
-	SupplierName			nvarchar(40)			not null,
-	DeviceType				nvarchar(40)			not null,
+	SupplierID				int						not null,
+	DeviceID				int						not null,
 	Quantity				int						not null,
-	primary key (SupplierName, DeviceType),
-	foreign key (SupplierName) references Supplier(SupplierName),
-	foreign key (DeviceType) references Device(DeviceType)
+	primary key (SupplierID, DeviceID),
+	foreign key (SupplierID) references Supplier(SupplierID),
+	foreign key (DeviceID) references Device(DeviceID)
 );
 
 /*==============================================================*/
@@ -204,7 +249,7 @@ create table Warehouse(
 	Capacity				int						not null,
 	AddressID				int						not null,
 	WarehouseInventory		int						not null,
-	primary key (WarehouseName),
+	primary key (WarehouseID),
 	foreign key (AddressID) references Address(AddressID)
 );
 
@@ -212,12 +257,12 @@ create table Warehouse(
 /* Table: Inventory                                        */
 /*==============================================================*/
 create table Inventory(
-	WarehouseName			nvarchar(40)			not null,
-	DeviceType				nvarchar(40)			not null,
+	WarehouseID				int						not null,
+	DeviceID				int						not null,
 	Quantity				int						not null,
-	primary key (WarehouseName, DeviceType),
-	foreign key (DeviceType) references Device(DeviceType),
-	foreign key (WarehouseName) references Warehouse(WarehouseName)
+	primary key (WarehouseID, DeviceID),
+	foreign key (DeviceID) references Device(DeviceID),
+	foreign key (WarehouseID) references Warehouse(WarehouseID)
 );
 
 /*==============================================================*/
@@ -228,19 +273,6 @@ create table DeviceDelivery(
 	ShipDate				nvarchar(40)			not null,
 	primary key (DeviceID),
 	foreign key (DeviceID) references Device(DeviceID)
-);
-
-/*==============================================================*/
-/* Table: Address                                        */
-/*==============================================================*/
-create table Address(
-	AddressID				int						not null auto_increment,
-	Street					(40)					not null,
-	City					nvarchar(40)			not null,
-	State					nvarchar(40)			not null,
-	Country					nvarchar(40)			not null,
-	Zipcode					nvarchar(20)			not null, 
-	primary key (AddressID)
 );
 
 
