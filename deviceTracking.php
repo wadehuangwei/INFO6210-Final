@@ -14,7 +14,8 @@
     }
 
     $patientID = mysql_real_escape_string($_SESSION['username']);
-    $sql_addr = "SELECT Address.Street, Address.City, Address.State FROM Address INNER JOIN UserAccount ON Address.AddressID = UserAccount.AddressID WHERE UserAccount.Username = '$patientID' LIMIT 1";
+    //$patientID = 1;
+    $sql_addr = "SELECT Address.Street, Address.City, Address.State FROM Address INNER JOIN UserAccount ON Address.AddressID = UserAccount.AddressID WHERE UserAccount.UserID = '$patientID' LIMIT 1";
     $result_addr = $conn->query($sql_addr);
     $row_addr = mysqli_fetch_assoc($result_addr);
     $street = $row_addr['Street'];
@@ -63,6 +64,7 @@
 
     
     $deviceID = mysql_real_escape_string($_GET['deviceID']);
+    //$deviceID = 1;
     $sql_device = "SELECT ShipDate FROM DeviceDelivery WHERE DeviceID = '$deviceID'";
     $result_device = $conn->query($sql_device);
     $row_device = mysqli_fetch_assoc($result_device);
@@ -70,12 +72,18 @@
 
    //clock
 
-   $shipTime = strtotime($shipDate);
+    $shipTime = strtotime($shipDate);
+    //$shipTime = time() - 120;
+    //$nowTime = time();
+    //$secondsPast = 120;
+    //$secondsLeft = 60;
+
    $secondsPast = time() - $shipTime;
    $secondsLeft = 120 - $secondsPast;
    $prop = $secondsPast / 120;
    $midlat = $prop * ($coordinates2['lat'] - $coordinates1['lat']) + $coordinates1['lat'];
    $midlong = $prop * ($coordinates2['long'] - $coordinates1['long']) + $coordinates1['long'];
+
 
    $conn->close();
 
@@ -96,17 +104,13 @@
         padding: 0px
       }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzQBsXRx_FJMRAIF1CbTv7-58baFTWjH8&v=3.exp"></script>
     <script>
     function initialize() {
-    var centerLatLng = [
-    <?php
-    echo 'new google.maps.LatLng('.$midlat.', '.$midlong.')'; 
-    ?>
-    ];
+
     var mapOptions = {
     zoom: 12,
-    center: centerLatLng,
+    center: {lat: <?php echo $midlat; ?>, lng: <?php echo $midlong; ?>},
     mapTypeId: google.maps.MapTypeId.TERRAIN
     };
 
@@ -114,19 +118,9 @@
     var map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
 
-    var deliveryCoordinates = [
-    <?php
-    
-    //Echo out the users start location
-    echo 'new google.maps.LatLng('.$coordinates1['lat'].', '.$coordinates1['long'].'),'; 
-
-    //echo users ending position
-    echo 'new google.maps.LatLng('.$coordinates2['lat'].', '.$coordinates2['long'].')';
-    ?>
-    ];
-
     var straightPath = new google.maps.Polyline({
-        path: deliveryCoordinates,
+        path: [{lat: <?php echo $coordinates1['lat']; ?>, lng: <?php echo $coordinates1['long']; ?>},
+        {lat: <?php echo $coordinates2['lat']; ?>, lng: <?php echo $coordinates2['long']; ?>}],
         geodesic: true,
         strokeColor: '#FF0000',
         strokeOpacity: 1.0,
@@ -135,7 +129,7 @@
     straightPath.setMap(map);
 
     var marker = new google.maps.Marker({
-        position: centerLatLng,
+        position: {lat: <?php echo $midlat; ?>, lng: <?php echo $midlong; ?>},
         map: map,
         title: 'Your device'
         });
