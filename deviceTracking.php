@@ -13,7 +13,12 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $patientID = mysql_real_escape_string($_SESSION['username']);
+    $username = mysql_real_escape_string($_SESSION['username']);
+    $sql_pID = "SELECT UserID FROM UserAccount WHERE Username = '$username' LIMIT 1";
+    $result_pID = $conn->query($sql_pID);
+    $row_pID = mysqli_fetch_assoc($result_pID);
+    $patientID = $row_pID['UserID'];
+
     //$patientID = 1;
     $sql_addr = "SELECT Address.Street, Address.City, Address.State FROM Address INNER JOIN UserAccount ON Address.AddressID = UserAccount.AddressID WHERE UserAccount.UserID = '$patientID' LIMIT 1";
     $result_addr = $conn->query($sql_addr);
