@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 04, 2016 at 05:58 PM
--- Server version: 10.1.19-MariaDB
+-- Generation Time: 2016-12-04 21:59:36
+-- 服务器版本： 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -25,7 +25,7 @@ USE `healthcare`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Address`
+-- 表的结构 `Address`
 --
 
 CREATE TABLE `Address` (
@@ -38,7 +38,7 @@ CREATE TABLE `Address` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Address`
+-- 转存表中的数据 `Address`
 --
 
 INSERT INTO `Address` (`AddressID`, `Street`, `City`, `State`, `Country`, `Zipcode`) VALUES
@@ -57,7 +57,7 @@ INSERT INTO `Address` (`AddressID`, `Street`, `City`, `State`, `Country`, `Zipco
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Device`
+-- 表的结构 `Device`
 --
 
 CREATE TABLE `Device` (
@@ -67,7 +67,7 @@ CREATE TABLE `Device` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Device`
+-- 转存表中的数据 `Device`
 --
 
 INSERT INTO `Device` (`DeviceID`, `DeviceTypeID`, `Price`) VALUES
@@ -105,7 +105,7 @@ INSERT INTO `Device` (`DeviceID`, `DeviceTypeID`, `Price`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `DeviceDelivery`
+-- 表的结构 `DeviceDelivery`
 --
 
 CREATE TABLE `DeviceDelivery` (
@@ -116,7 +116,7 @@ CREATE TABLE `DeviceDelivery` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `DeviceType`
+-- 表的结构 `DeviceType`
 --
 
 CREATE TABLE `DeviceType` (
@@ -125,7 +125,7 @@ CREATE TABLE `DeviceType` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `DeviceType`
+-- 转存表中的数据 `DeviceType`
 --
 
 INSERT INTO `DeviceType` (`DeviceTypeID`, `DeviceType`) VALUES
@@ -136,7 +136,7 @@ INSERT INTO `DeviceType` (`DeviceTypeID`, `DeviceType`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Disease`
+-- 表的结构 `Disease`
 --
 
 CREATE TABLE `Disease` (
@@ -145,7 +145,7 @@ CREATE TABLE `Disease` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Disease`
+-- 转存表中的数据 `Disease`
 --
 
 INSERT INTO `Disease` (`DiseaseID`, `DiseaseName`) VALUES
@@ -158,7 +158,7 @@ INSERT INTO `Disease` (`DiseaseID`, `DiseaseName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `DiseaseHasSymphtom`
+-- 表的结构 `DiseaseHasSymphtom`
 --
 
 CREATE TABLE `DiseaseHasSymphtom` (
@@ -167,7 +167,7 @@ CREATE TABLE `DiseaseHasSymphtom` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `DiseaseHasSymphtom`
+-- 转存表中的数据 `DiseaseHasSymphtom`
 --
 
 INSERT INTO `DiseaseHasSymphtom` (`DiseaseID`, `SymphtomID`) VALUES
@@ -199,7 +199,7 @@ INSERT INTO `DiseaseHasSymphtom` (`DiseaseID`, `SymphtomID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Doctor`
+-- 表的结构 `Doctor`
 --
 
 CREATE TABLE `Doctor` (
@@ -210,7 +210,7 @@ CREATE TABLE `Doctor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Doctor`
+-- 转存表中的数据 `Doctor`
 --
 
 INSERT INTO `Doctor` (`DoctorID`, `HospitalID`, `Speciality`, `Title`) VALUES
@@ -219,7 +219,7 @@ INSERT INTO `Doctor` (`DoctorID`, `HospitalID`, `Speciality`, `Title`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Drug`
+-- 表的结构 `Drug`
 --
 
 CREATE TABLE `Drug` (
@@ -228,7 +228,7 @@ CREATE TABLE `Drug` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Drug`
+-- 转存表中的数据 `Drug`
 --
 
 INSERT INTO `Drug` (`DrugID`, `DrugName`) VALUES
@@ -253,7 +253,7 @@ INSERT INTO `Drug` (`DrugID`, `DrugName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `HealthRecord`
+-- 表的结构 `HealthRecord`
 --
 
 CREATE TABLE `HealthRecord` (
@@ -268,7 +268,7 @@ CREATE TABLE `HealthRecord` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Hospital`
+-- 表的结构 `Hospital`
 --
 
 CREATE TABLE `Hospital` (
@@ -279,7 +279,7 @@ CREATE TABLE `Hospital` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Hospital`
+-- 转存表中的数据 `Hospital`
 --
 
 INSERT INTO `Hospital` (`HospitalID`, `HospitalName`, `Ownership`, `AddressID`) VALUES
@@ -292,7 +292,7 @@ INSERT INTO `Hospital` (`HospitalID`, `HospitalName`, `Ownership`, `AddressID`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `MedicalRecord`
+-- 表的结构 `MedicalRecord`
 --
 
 CREATE TABLE `MedicalRecord` (
@@ -304,7 +304,7 @@ CREATE TABLE `MedicalRecord` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `MedicalRecord`
+-- 转存表中的数据 `MedicalRecord`
 --
 
 INSERT INTO `MedicalRecord` (`MedicalRecordNumber`, `PatientID`, `PrescriptionID`, `DateOfRequest`, `Treatmentresult`) VALUES
@@ -313,7 +313,7 @@ INSERT INTO `MedicalRecord` (`MedicalRecordNumber`, `PatientID`, `PrescriptionID
 -- --------------------------------------------------------
 
 --
--- Table structure for table `MedicalReordHasTest`
+-- 表的结构 `MedicalReordHasTest`
 --
 
 CREATE TABLE `MedicalReordHasTest` (
@@ -324,7 +324,18 @@ CREATE TABLE `MedicalReordHasTest` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Patient`
+-- 表的结构 `MedicaRecordHasSymphtoms`
+--
+
+CREATE TABLE `MedicaRecordHasSymphtoms` (
+  `MedicalRecordNumber` int(40) NOT NULL,
+  `SymphtomID` int(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `Patient`
 --
 
 CREATE TABLE `Patient` (
@@ -333,7 +344,7 @@ CREATE TABLE `Patient` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Patient`
+-- 转存表中的数据 `Patient`
 --
 
 INSERT INTO `Patient` (`PatientID`, `NearestWarehouseID`) VALUES
@@ -342,7 +353,7 @@ INSERT INTO `Patient` (`PatientID`, `NearestWarehouseID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Prescription`
+-- 表的结构 `Prescription`
 --
 
 CREATE TABLE `Prescription` (
@@ -353,7 +364,7 @@ CREATE TABLE `Prescription` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Prescription`
+-- 转存表中的数据 `Prescription`
 --
 
 INSERT INTO `Prescription` (`PrescriptionID`, `DoctorID`, `PrescriptionDescription`, `DiseaseID`) VALUES
@@ -362,7 +373,7 @@ INSERT INTO `Prescription` (`PrescriptionID`, `DoctorID`, `PrescriptionDescripti
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Supplier`
+-- 表的结构 `Supplier`
 --
 
 CREATE TABLE `Supplier` (
@@ -374,7 +385,7 @@ CREATE TABLE `Supplier` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Supply`
+-- 表的结构 `Supply`
 --
 
 CREATE TABLE `Supply` (
@@ -386,7 +397,7 @@ CREATE TABLE `Supply` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Symphtom`
+-- 表的结构 `Symphtom`
 --
 
 CREATE TABLE `Symphtom` (
@@ -396,7 +407,7 @@ CREATE TABLE `Symphtom` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Symphtom`
+-- 转存表中的数据 `Symphtom`
 --
 
 INSERT INTO `Symphtom` (`SymphtomID`, `Description`, `DrugID`) VALUES
@@ -421,7 +432,7 @@ INSERT INTO `Symphtom` (`SymphtomID`, `Description`, `DrugID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Test`
+-- 表的结构 `Test`
 --
 
 CREATE TABLE `Test` (
@@ -435,7 +446,7 @@ CREATE TABLE `Test` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `UserAccount`
+-- 表的结构 `UserAccount`
 --
 
 CREATE TABLE `UserAccount` (
@@ -451,7 +462,7 @@ CREATE TABLE `UserAccount` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `UserAccount`
+-- 转存表中的数据 `UserAccount`
 --
 
 INSERT INTO `UserAccount` (`UserID`, `Username`, `Password`, `FirstName`, `LastName`, `Phone`, `Email`, `AccountType`, `AddressID`) VALUES
@@ -460,7 +471,7 @@ INSERT INTO `UserAccount` (`UserID`, `Username`, `Password`, `FirstName`, `LastN
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Warehouse`
+-- 表的结构 `Warehouse`
 --
 
 CREATE TABLE `Warehouse` (
@@ -472,7 +483,7 @@ CREATE TABLE `Warehouse` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Warehouse`
+-- 转存表中的数据 `Warehouse`
 --
 
 INSERT INTO `Warehouse` (`WarehouseID`, `WarehouseName`, `Capacity`, `AddressID`, `Inventory`) VALUES
@@ -568,6 +579,13 @@ ALTER TABLE `MedicalReordHasTest`
   ADD KEY `TestNumber` (`TestNumber`);
 
 --
+-- Indexes for table `MedicaRecordHasSymphtoms`
+--
+ALTER TABLE `MedicaRecordHasSymphtoms`
+  ADD PRIMARY KEY (`MedicalRecordNumber`,`SymphtomID`),
+  ADD KEY `SymphtomID` (`SymphtomID`);
+
+--
 -- Indexes for table `Patient`
 --
 ALTER TABLE `Patient`
@@ -627,175 +645,182 @@ ALTER TABLE `Warehouse`
   ADD KEY `AddressID` (`AddressID`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- 在导出的表使用AUTO_INCREMENT
 --
 
 --
--- AUTO_INCREMENT for table `Address`
+-- 使用表AUTO_INCREMENT `Address`
 --
 ALTER TABLE `Address`
   MODIFY `AddressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=700012;
 --
--- AUTO_INCREMENT for table `Device`
+-- 使用表AUTO_INCREMENT `Device`
 --
 ALTER TABLE `Device`
   MODIFY `DeviceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=500031;
 --
--- AUTO_INCREMENT for table `DeviceType`
+-- 使用表AUTO_INCREMENT `DeviceType`
 --
 ALTER TABLE `DeviceType`
   MODIFY `DeviceTypeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=400004;
 --
--- AUTO_INCREMENT for table `Disease`
+-- 使用表AUTO_INCREMENT `Disease`
 --
 ALTER TABLE `Disease`
   MODIFY `DiseaseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100006;
 --
--- AUTO_INCREMENT for table `DiseaseHasSymphtom`
+-- 使用表AUTO_INCREMENT `DiseaseHasSymphtom`
 --
 ALTER TABLE `DiseaseHasSymphtom`
   MODIFY `DiseaseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100006;
 --
--- AUTO_INCREMENT for table `Drug`
+-- 使用表AUTO_INCREMENT `Drug`
 --
 ALTER TABLE `Drug`
   MODIFY `DrugID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=300018;
 --
--- AUTO_INCREMENT for table `HealthRecord`
+-- 使用表AUTO_INCREMENT `HealthRecord`
 --
 ALTER TABLE `HealthRecord`
   MODIFY `HealthRecordNumber` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `Hospital`
+-- 使用表AUTO_INCREMENT `Hospital`
 --
 ALTER TABLE `Hospital`
   MODIFY `HospitalID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=800006;
 --
--- AUTO_INCREMENT for table `MedicalRecord`
+-- 使用表AUTO_INCREMENT `MedicalRecord`
 --
 ALTER TABLE `MedicalRecord`
   MODIFY `MedicalRecordNumber` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `Prescription`
+-- 使用表AUTO_INCREMENT `Prescription`
 --
 ALTER TABLE `Prescription`
   MODIFY `PrescriptionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `Supplier`
+-- 使用表AUTO_INCREMENT `Supplier`
 --
 ALTER TABLE `Supplier`
   MODIFY `SupplierID` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `Symphtom`
+-- 使用表AUTO_INCREMENT `Symphtom`
 --
 ALTER TABLE `Symphtom`
   MODIFY `SymphtomID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200018;
 --
--- AUTO_INCREMENT for table `Test`
+-- 使用表AUTO_INCREMENT `Test`
 --
 ALTER TABLE `Test`
   MODIFY `TestNumber` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `UserAccount`
+-- 使用表AUTO_INCREMENT `UserAccount`
 --
 ALTER TABLE `UserAccount`
   MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `Warehouse`
+-- 使用表AUTO_INCREMENT `Warehouse`
 --
 ALTER TABLE `Warehouse`
   MODIFY `WarehouseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=600006;
 --
--- Constraints for dumped tables
+-- 限制导出的表
 --
 
 --
--- Constraints for table `Device`
+-- 限制表 `Device`
 --
 ALTER TABLE `Device`
   ADD CONSTRAINT `device_ibfk_1` FOREIGN KEY (`DeviceTypeID`) REFERENCES `DeviceType` (`DeviceTypeID`);
 
 --
--- Constraints for table `DeviceDelivery`
+-- 限制表 `DeviceDelivery`
 --
 ALTER TABLE `DeviceDelivery`
   ADD CONSTRAINT `devicedelivery_ibfk_1` FOREIGN KEY (`DeviceID`) REFERENCES `Device` (`DeviceID`);
 
 --
--- Constraints for table `DiseaseHasSymphtom`
+-- 限制表 `DiseaseHasSymphtom`
 --
 ALTER TABLE `DiseaseHasSymphtom`
   ADD CONSTRAINT `diseasehassymphtom_ibfk_1` FOREIGN KEY (`DiseaseID`) REFERENCES `Disease` (`DiseaseID`),
   ADD CONSTRAINT `diseasehassymphtom_ibfk_2` FOREIGN KEY (`SymphtomID`) REFERENCES `Symphtom` (`SymphtomID`);
 
 --
--- Constraints for table `Doctor`
+-- 限制表 `Doctor`
 --
 ALTER TABLE `Doctor`
   ADD CONSTRAINT `doctor_ibfk_1` FOREIGN KEY (`DoctorID`) REFERENCES `UserAccount` (`UserID`),
   ADD CONSTRAINT `doctor_ibfk_2` FOREIGN KEY (`HospitalID`) REFERENCES `Hospital` (`HospitalID`);
 
 --
--- Constraints for table `HealthRecord`
+-- 限制表 `HealthRecord`
 --
 ALTER TABLE `HealthRecord`
   ADD CONSTRAINT `healthrecord_ibfk_1` FOREIGN KEY (`PatientID`) REFERENCES `Patient` (`PatientID`);
 
 --
--- Constraints for table `Hospital`
+-- 限制表 `Hospital`
 --
 ALTER TABLE `Hospital`
   ADD CONSTRAINT `hospital_ibfk_1` FOREIGN KEY (`AddressID`) REFERENCES `Address` (`AddressID`);
 
 --
--- Constraints for table `MedicalRecord`
+-- 限制表 `MedicalRecord`
 --
 ALTER TABLE `MedicalRecord`
   ADD CONSTRAINT `medicalrecord_ibfk_1` FOREIGN KEY (`PatientID`) REFERENCES `Patient` (`PatientID`),
   ADD CONSTRAINT `medicalrecord_ibfk_2` FOREIGN KEY (`PrescriptionID`) REFERENCES `Prescription` (`PrescriptionID`);
 
 --
--- Constraints for table `MedicalReordHasTest`
+-- 限制表 `MedicalReordHasTest`
 --
 ALTER TABLE `MedicalReordHasTest`
   ADD CONSTRAINT `medicalreordhastest_ibfk_1` FOREIGN KEY (`MedicalRecordNumber`) REFERENCES `MedicalRecord` (`MedicalRecordNumber`),
   ADD CONSTRAINT `medicalreordhastest_ibfk_2` FOREIGN KEY (`TestNumber`) REFERENCES `Test` (`TestNumber`);
 
 --
--- Constraints for table `Patient`
+-- 限制表 `MedicaRecordHasSymphtoms`
+--
+ALTER TABLE `MedicaRecordHasSymphtoms`
+  ADD CONSTRAINT `MedicalRecordNumber` FOREIGN KEY (`MedicalRecordNumber`) REFERENCES `MedicalRecord` (`MedicalRecordNumber`),
+  ADD CONSTRAINT `SymphtomID` FOREIGN KEY (`SymphtomID`) REFERENCES `Symphtom` (`SymphtomID`);
+
+--
+-- 限制表 `Patient`
 --
 ALTER TABLE `Patient`
   ADD CONSTRAINT `patient_ibfk_1` FOREIGN KEY (`PatientID`) REFERENCES `UserAccount` (`UserID`),
   ADD CONSTRAINT `patient_ibfk_2` FOREIGN KEY (`NearestWarehouseID`) REFERENCES `Warehouse` (`WarehouseID`);
 
 --
--- Constraints for table `Prescription`
+-- 限制表 `Prescription`
 --
 ALTER TABLE `Prescription`
   ADD CONSTRAINT `prescription_ibfk_1` FOREIGN KEY (`DoctorID`) REFERENCES `Doctor` (`DoctorID`),
   ADD CONSTRAINT `prescription_ibfk_2` FOREIGN KEY (`DiseaseID`) REFERENCES `Disease` (`DiseaseID`);
 
 --
--- Constraints for table `Supplier`
+-- 限制表 `Supplier`
 --
 ALTER TABLE `Supplier`
   ADD CONSTRAINT `supplier_ibfk_1` FOREIGN KEY (`AddressID`) REFERENCES `Address` (`AddressID`);
 
 --
--- Constraints for table `Supply`
+-- 限制表 `Supply`
 --
 ALTER TABLE `Supply`
   ADD CONSTRAINT `supply_ibfk_1` FOREIGN KEY (`SupplierID`) REFERENCES `Supplier` (`SupplierID`),
   ADD CONSTRAINT `supply_ibfk_2` FOREIGN KEY (`DeviceID`) REFERENCES `Device` (`DeviceID`);
 
 --
--- Constraints for table `Symphtom`
+-- 限制表 `Symphtom`
 --
 ALTER TABLE `Symphtom`
   ADD CONSTRAINT `symphtom_ibfk_1` FOREIGN KEY (`DrugID`) REFERENCES `Drug` (`DrugID`);
 
 --
--- Constraints for table `Test`
+-- 限制表 `Test`
 --
 ALTER TABLE `Test`
   ADD CONSTRAINT `test_ibfk_1` FOREIGN KEY (`PatientID`) REFERENCES `Patient` (`PatientID`),
@@ -803,13 +828,13 @@ ALTER TABLE `Test`
   ADD CONSTRAINT `test_ibfk_3` FOREIGN KEY (`PrescriptionID`) REFERENCES `Prescription` (`PrescriptionID`);
 
 --
--- Constraints for table `UserAccount`
+-- 限制表 `UserAccount`
 --
 ALTER TABLE `UserAccount`
   ADD CONSTRAINT `useraccount_ibfk_1` FOREIGN KEY (`AddressID`) REFERENCES `Address` (`AddressID`);
 
 --
--- Constraints for table `Warehouse`
+-- 限制表 `Warehouse`
 --
 ALTER TABLE `Warehouse`
   ADD CONSTRAINT `warehouse_ibfk_1` FOREIGN KEY (`AddressID`) REFERENCES `Address` (`AddressID`);

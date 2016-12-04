@@ -13,15 +13,13 @@ if ($conn->connect_error) {
 
 $sql = "SELECT DateofRequest, MedicalRecordNumber, PatientID, PrescriptionID, treatmentresult FROM MedicalRecord";
 $mdResult = $conn->query($sql);
-$sql = "EXISTS (SELECT * FROM MedicalRecordHasTest WHERE MedicalRecordNumber = ?)";
-$needTest = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>
-		Request Records
+		Process Records
 	</title>
 	<style>
 	table {
@@ -43,18 +41,15 @@ $needTest = $conn->query($sql);
 </head>
 <body>
 	<a href='homepage.php'>Home Page</a>
-	<h1>My Requests</h1><br>
+	<h1>All Requests</h1><br>
 	<table>
 		<tr>
 			<th>Medical Record No.</th>
 			<th>Date of Request</th>
 			<th>Patient ID</th>
-			<th>Symphtoms</th>
+			<th>Prescription ID</th>
 			<th>Need test?</th>
 			<th>Test No. (Device Tracking)</th>
-			<th>Feedback Test Result</th>
-			<th>Prescription ID</th>
-			<th>Feedback Treatment Result</th>
 		</tr>
 		<?php
 		if ($mdResult->num_rows > 0) {
@@ -67,25 +62,12 @@ $needTest = $conn->query($sql);
 					$sql = "SELECT * FROM MedicalRecordHasTest WHERE MedicalRecordNumber = " . $row['MedicalRecordNumber'];
 					$testNumber = $conn->query($sql);
 				}
-
+				// TODO: add prescription.php page
 				echo 	"<tr>
 				<td>" . $row['MedicalRecordNumber'] . "</td>
 				<td>" . $row['DateofRequest'] . "</td>
-				<td>" . $row['PatientID'] . "</td>";
-
-				$sql = "SELECT DiseaseID FROM Prescription WHERE PrescriptionID=" . $row['PrescriptionID'];
-				$result = $conn->query($sql);
-				$diseaseID = $result->fetch_assoc();
-				echo "<td><a href='/INFO6210-Final/symphtoms.php?DiseaseID=" . $diseaseID['DiseaseID'] . "'>GO</a></td>";
-
-				$sql = "SELECT Description
-						FROM Symphtom
-						INNER JOIN DiseaseHasSymphtom
-						ON Symphtom.SymphtomID=DiseaseHasSymphtom.SymphtomID
-						WHERE DiseaseID='" . $diseaseID['DiseaseID'] . "'";
-				$result = $conn->query($sql);
-				$Description = $result->fetch_assoc();
-				var_dump($Description);
+				<td><a href='/INFO6210-Final/patient.php?PatientID=" . $row['PatientID'] . "'>" . $row['PatientID'] . "</td>
+				<td><a href='/INFO6210-Final/prescription.php?PrescriptionID=" . $row['PrescriptionID'] . "'>" . $row['PrescriptionID'] . "</td>";
 
 				// Need test? collum
 				if ($needTest) {
@@ -100,22 +82,6 @@ $needTest = $conn->query($sql);
 					echo "<td><a href='/INFO6210-Final/tracking.php?testNumber=" . $testNumber . "'>GO</a></td>";
 				} else {
 					echo "<td>N/A</td>";
-				}
-
-				// test result collum
-				// TODO: add feedbackTestResult page
-				echo "<td><a href='/INFO6210-Final/feedbackTestResult.php?testNumber=" . $testNumber . "'>GO</a></td>";
-
-				// Prescription ID collum
-				// TODO: add prescription page
-				echo "<td><a href='/INFO6210-Final/prescription.php?PrescriptionID=>" . $row['PrescriptionID'] . "'>" . $row['PrescriptionID'] . "</td>";
-
-				// treatment result collum
-				// TODO: add feedbackTreatmentResult page
-				if ((!isset($row['treatmentresult']) || trim($row['treatmentresult'])==='')) {
-					echo "<td><a href='/INFO6210-Final/feedbackTreatmentResult.php?testNumber=" . $testNumber . "'>GO</a></td>";
-				} else {
-					echo "<td>" . $row['treatmentresult'] . "</td></tr>";
 				}
 				
 			}
