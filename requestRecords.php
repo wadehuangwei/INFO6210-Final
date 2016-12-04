@@ -66,11 +66,12 @@ $needTest = $conn->query($sql);
 					$sql = "SELECT * FROM MedicalRecordHasTest WHERE MedicalRecordNumber = " . $row['MedicalRecordNumber'];
 					$testNumber = $conn->query($sql);
 				}
+				// TODO: add getPrescription.php page
 				echo 	"<tr>
 				<td>" . $row['MedicalRecordNumber'] . "</td>
 				<td>" . $row['DateofRequest'] . "</td>
 				<td>" . $row['PatientID'] . "</td>
-				<td>" . $row['PrescriptionID'] . "</td>";
+				<td><a href='/INFO6210-Final/getPrescription.php?PrescriptionID=>" . $row['PrescriptionID'] . "'>" . $row['PrescriptionID'] . "</td>";
 
 				// Need test? collum
 				if ($needTest) {
