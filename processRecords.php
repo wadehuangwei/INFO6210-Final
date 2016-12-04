@@ -47,6 +47,7 @@ $mdResult = $conn->query($sql);
 			<th>Medical Record No.</th>
 			<th>Date of Request</th>
 			<th>Patient ID</th>
+			<th>Symphtoms</th>
 			<th>Prescription ID</th>
 			<th>Need test?</th>
 			<th>Test No. (Device Tracking)</th>
@@ -66,8 +67,16 @@ $mdResult = $conn->query($sql);
 				echo 	"<tr>
 				<td>" . $row['MedicalRecordNumber'] . "</td>
 				<td>" . $row['DateofRequest'] . "</td>
-				<td><a href='/INFO6210-Final/patient.php?PatientID=" . $row['PatientID'] . "'>" . $row['PatientID'] . "</td>
-				<td><a href='/INFO6210-Final/prescription.php?PrescriptionID=" . $row['PrescriptionID'] . "'>" . $row['PrescriptionID'] . "</td>";
+				<td><a href='/INFO6210-Final/patient.php?PatientID=" . $row['PatientID'] . "'>" . $row['PatientID'] . "</td>";
+
+				// Symphtoms collum
+				$sql = "SELECT DiseaseID FROM Prescription WHERE PrescriptionID=" . $row['PrescriptionID'];
+				$result = $conn->query($sql);
+				$diseaseID = $result->fetch_assoc();
+				echo "<td><a href='/INFO6210-Final/symphtoms.php?MedicalRecordNumber=" . $row['MedicalRecordNumber'] . "'>Details</a></td>";
+
+				// PresccriptionID collum
+				echo "<td><a href='/INFO6210-Final/prescription.php?PrescriptionID=" . $row['PrescriptionID'] . "'>" . $row['PrescriptionID'] . "</td>";
 
 				// Need test? collum
 				if ($needTest) {

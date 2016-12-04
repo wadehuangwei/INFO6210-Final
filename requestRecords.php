@@ -13,8 +13,6 @@ if ($conn->connect_error) {
 
 $sql = "SELECT DateofRequest, MedicalRecordNumber, PatientID, PrescriptionID, treatmentresult FROM MedicalRecord";
 $mdResult = $conn->query($sql);
-$sql = "EXISTS (SELECT * FROM MedicalRecordHasTest WHERE MedicalRecordNumber = ?)";
-$needTest = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -73,19 +71,11 @@ $needTest = $conn->query($sql);
 				<td>" . $row['DateofRequest'] . "</td>
 				<td>" . $row['PatientID'] . "</td>";
 
+				// Symphtoms collum
 				$sql = "SELECT DiseaseID FROM Prescription WHERE PrescriptionID=" . $row['PrescriptionID'];
 				$result = $conn->query($sql);
 				$diseaseID = $result->fetch_assoc();
-				echo "<td><a href='/INFO6210-Final/symphtoms.php?DiseaseID=" . $diseaseID['DiseaseID'] . "'>GO</a></td>";
-
-				$sql = "SELECT Description
-						FROM Symphtom
-						INNER JOIN DiseaseHasSymphtom
-						ON Symphtom.SymphtomID=DiseaseHasSymphtom.SymphtomID
-						WHERE DiseaseID='" . $diseaseID['DiseaseID'] . "'";
-				$result = $conn->query($sql);
-				$Description = $result->fetch_assoc();
-				var_dump($Description);
+				echo "<td><a href='/INFO6210-Final/symphtoms.php?MedicalRecordNumber=" . $row['MedicalRecordNumber'] . "'>Details</a></td>";
 
 				// Need test? collum
 				if ($needTest) {
