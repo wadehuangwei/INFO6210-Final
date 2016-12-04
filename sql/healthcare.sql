@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2016-12-04 02:26:25
+-- Generation Time: 2016-12-04 05:00:10
 -- 服务器版本： 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `healthcare`
 --
+CREATE DATABASE IF NOT EXISTS `healthcare` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `healthcare`;
 
 -- --------------------------------------------------------
 
