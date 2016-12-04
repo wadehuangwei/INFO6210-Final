@@ -132,8 +132,10 @@ create table Device(
 	DeviceID				int						not null auto_increment,
 	DeviceTypeID			int 					not null,
 	Price					decimal(12,2)			null,
+    WarehouseID             int                     not null,
 	primary key (DeviceID),
-	foreign key (DeviceTypeID) references DeviceType(DeviceTypeID)
+	foreign key (DeviceTypeID) references DeviceType(DeviceTypeID),
+    foreign key (WarehouseID) references Warehouse(WarehouseID)
 );
 
 /*==============================================================*/
