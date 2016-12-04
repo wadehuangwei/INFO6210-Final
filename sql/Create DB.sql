@@ -1,4 +1,5 @@
 create database healthcare;
+
 use healthcare;
 
 /*==============================================================*/
@@ -40,7 +41,7 @@ create table Warehouse(
 	WarehouseName			nvarchar(40)			not null,
 	Capacity				int						not null,
 	AddressID				int						not null,
-	WarehouseInventory		int						not null,
+	Inventory				int						not null,
 	primary key (WarehouseID),
 	foreign key (AddressID) references Address(AddressID)
 );
@@ -120,8 +121,7 @@ create table HealthRecord(
 /*==============================================================*/
 create table DeviceType(
 	DeviceTypeID			int						not null auto_increment,
-	Description				nvarchar(40)			not null,
-	Usages					nvarchar(40)			null,
+	DeviceType 				nvarchar(40)			not null,
 	primary key (DeviceTypeID)
 );
 
@@ -142,9 +142,7 @@ create table Device(
 create table Disease(
 	DiseaseID				int						not null auto_increment,
 	DiseaseName				nvarchar(40)			not null,
-	DeviceID				int						not null,
-	primary key (DiseaseID),
-	foreign key (DeviceID) references Device(DeviceID)
+	primary key (DiseaseID)
 );
 
 /*==============================================================*/
@@ -232,17 +230,6 @@ create table Supply(
 	primary key (SupplierID, DeviceID),
 	foreign key (SupplierID) references Supplier(SupplierID),
 	foreign key (DeviceID) references Device(DeviceID)
-);
-
-/*==============================================================*/
-/* Table: Inventory                                        */
-/*==============================================================*/
-create table Inventory(
-	WarehouseID				int						not null,
-	DeviceID				int						not null,
-	primary key (WarehouseID, DeviceID),
-	foreign key (DeviceID) references Device(DeviceID),
-	foreign key (WarehouseID) references Warehouse(WarehouseID)
 );
 
 /*==============================================================*/
