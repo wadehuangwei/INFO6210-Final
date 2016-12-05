@@ -10,23 +10,40 @@ if (isset($_POST['login_btn']))
   $password = mysql_real_escape_string($_POST['password']);
 
     $password = md5($password); //remember we hased password before string last time
-    $sql = "SELECT * FROM useraccount WHERE username ='$username' AND password ='$password'";
-    $result = mysqli_query($db,$sql);
 
-    if(mysqli_num_rows($result) == 1){
+    $sql = "SELECT * FROM UserAccount WHERE Username ='$username' AND Password ='$password'";
+    $result = mysqli_query($db,$sql);
+    $row_accType = mysqli_fetch_assoc($result);
+
+    $accountType = $row_accType['AccountType'];
+
+    if(mysqli_num_rows($result) == 1)
+    {
+
         $_SESSION['message'] = "You are now logged in";
         $_SESSION['username'] = $username;
-
-        header("location: homePage.php"); //redirect to home page
-
-    } else
-    {
-        $_SESSION['message'] = "Username/password combination incorrect";
-
-    }
+                if($accountType == "Doctor"){
+ header("location: register.php");//redirect to home page
 } 
 
+if($accountType =="Patient"){
+header("location: homePage.php");
+}
+
+        // header("location: homePage.php"); //redirect to home page
+
+    } 
+
+    else
+    {
+        $_SESSION['message'] = "Username/password combination incorrect";
+    }
+
+} 
+
+
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -36,74 +53,9 @@ if (isset($_POST['login_btn']))
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>     
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/login.css">
 
 </head>
-
-<style>
-body{
-/*  background-color: #f1f1f1;
-*/}
-form {
-    border: 3px solid #f1f1f1;
-    background-color: white;
-}
-
-input[type=text] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-}
-
-.cancelbtn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #f44336;
-}
-/*
-.imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-}*/
-
-img.avatar {
-    width: 100%;
-/*    border-radius: 10%;
-*/}
-
-.container1 {
-    padding: 16px;
-}
-
-span.psw {
-    float: right;
-    padding-top: 16px;
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-    span.psw {
-       display: block;
-       float: none;
-    }
-    .cancelbtn {
-       width: 100%;
-    }
-}
-
-</style>
 
 <body ng-app="">
 
@@ -158,7 +110,14 @@ span.psw {
                                      
                     <div class="container1" style="background-color:#f1f1f1">
                     <input type="submit" name="login_btn" class="btn btn-primary" value="Login" >
+
                     <span class="psw">New User? |<a href="register.php">  Register</a></span>
+                    
+                    <!-- <select>
+                    <option value="Register">Register</option>
+                    <a href="register.php"><option value="patient" name ="patient" >As a Patient</option></a>
+                    <a href="register.php"><option value="doctor" name="doctor" >As a Doctor</option></a></span> -->
+
                     </div>
 
 </form>

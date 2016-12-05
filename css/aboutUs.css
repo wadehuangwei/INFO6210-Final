@@ -1,0 +1,45 @@
+body 
+{ /*padding-top: 100px; */
+}
+
+#nav-tabs > #active1 > .a 
+
+{ position: relative; 
+}
+
+#nav-tabs > #active1 > .a:hover,
+#nav-tabs > #active1 > .a:focus { background-color: transparent; }
+#nav-tabs > #active1 > .a > #quote1 {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+    opacity: 0;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    background-color: #13c0ba;
+    border-radius: 15px;
+    color: #fff;  
+}
+
+#nav-tabs > #active1.active > .a > #quote1 { opacity: 1; }
+#nav-tabs > #active1 > .a > img { box-shadow: 0 0 0 5px #13c0ba; }
+#nav-tabs > #active1 > .a > img { 
+    max-width: 100%; 
+    opacity: .3; 
+    -webkit-transform: scale(.8,.8);
+            transform: scale(.8,.8);
+    -webkit-transition: all 0.3s 0s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s 0s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#nav-tabs > #active1.active > .a > img,
+#nav-tabs > #active1:hover > .a > img,
+#nav-tabs > #active1:focus > .a > img { 
+    opacity: 1; 
+    -webkit-transform: none;
+            transform: none;
+    -webkit-transition: all 0.3s 0s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s 0s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.tab-pane .tab-inner { padding: 30px 0 20px; }
