@@ -11,18 +11,18 @@ if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
 
-$testNumber = mysql_real_escape_string($_GET['testNumber']);
-$testResult;
+$medicalRecordNumber = mysql_real_escape_string($_GET['medicalRecordNumber']);
+$treatmentresult;
 
-if (isset($_GET['testResult'])) {
-	$testResult = mysql_real_escape_string($_GET['testResult']);
-	$sql = "UPDATE test SET TestResult='$testResult' WHERE TestNumber='$testNumber'";
+if (isset($_GET['treatmentresult'])) {
+	$treatmentresult = mysql_real_escape_string($_GET['treatmentresult']);
+	$sql = "UPDATE MedicalRecord SET Treatmentresult='$treatmentresult' WHERE MedicalRecordNumber='$medicalRecordNumber'";
 	$result = $conn->query($sql);
 	header("location: requestRecords.php");
 }
-$sql = "SELECT TestResult FROM test WHERE TestNumber='$testNumber'";
+$sql = "SELECT Treatmentresult FROM MedicalRecord WHERE MedicalRecordNumber='$medicalRecordNumber'";
 $result = $conn->query($sql);
-$testResult = $result->fetch_assoc();
+$treatmentresult = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -52,14 +52,14 @@ $testResult = $result->fetch_assoc();
 <body>
 	<a href='homepage.php'>Home Page</a>  
 	<a href='requestRecords.php'>  &lt;&lt;Back</a></br></br>
-	<h1>Feedback Test Result</h1>
-	<textarea rows="10" cols="80" name="testResult" form="inputform"><?php
-			if (isset($testResult)) {
-				echo $testResult['TestResult'];
+	<h1>Feedback Treatment Result</h1>
+	<textarea rows="10" cols="80" name="treatmentresult" form="inputform"><?php
+			if (isset($treatmentresult)) {
+				echo $treatmentresult['Treatmentresult'];
 			}
 		?></textarea>
-	<form action="/info6210-final/feedbackTestResult.php" id="inputform">
-		<input type="hidden" name="testNumber" value="<?php echo $testNumber ?>" />
+	<form action="/info6210-final/feedbackTreatmentResult.php" id="inputform">
+		<input type="hidden" name="medicalRecordNumber" value="<?php echo $medicalRecordNumber ?>" />
 		<input type="submit">
 	</form>
 	</body>

@@ -94,15 +94,20 @@ $mdResult = $conn->query($sql);
 				$result = $conn->query($sql);
 				$deviceID = $result->fetch_assoc();
 				if ($needTest) {
-					// TODO: add tracking page
 					echo "<td><a href='/INFO6210-Final/deviceTracking.php?deviceID=" . $deviceID['DeviceID'] . "'>GO</a></td>";
 				} else {
 					echo "<td>N/A</td>";
 				}
 
 				// test result collum
-				// TODO: add feedbackTestResult page
-				echo "<td><a href='/INFO6210-Final/feedbackTestResult.php?testNumber=" . $testNumber . "'>GO</a></td>";
+				$sql = "SELECT TestResult FROM test WHERE TestNumber='$testNumber'";
+				$result = $conn->query($sql);
+				$testResult = $result->fetch_assoc();
+				if ((!isset($testResult['TestResult']) || trim($testResult['TestResult'])==='')) {
+					echo "<td><a href='/INFO6210-Final/feedbackTestResult.php?testNumber=" . $testNumber . "'>Go</a></td>";
+				} else {
+					echo "<td><a href='/INFO6210-Final/feedbackTestResult.php?testNumber=" . $testNumber . "'>Update</a></td>";
+				}
 
 				// Prescription ID collum
 				// TODO: add prescription page
@@ -111,11 +116,10 @@ $mdResult = $conn->query($sql);
 				// treatment result collum
 				// TODO: add feedbackTreatmentResult page
 				if ((!isset($row['treatmentresult']) || trim($row['treatmentresult'])==='')) {
-					echo "<td><a href='/INFO6210-Final/feedbackTreatmentResult.php?testNumber=" . $testNumber . "'>GO</a></td>";
+					echo "<td><a href='/INFO6210-Final/feedbackTreatmentResult.php?medicalRecordNumber=" . $row['MedicalRecordNumber'] . "'>Go</a></td>";
 				} else {
-					echo "<td>" . $row['treatmentresult'] . "</td></tr>";
+					echo "<td><a href='/INFO6210-Final/feedbackTreatmentResult.php?medicalRecordNumber=" . $row['MedicalRecordNumber'] . "'>Update</a></td>";
 				}
-				
 			}
 		} else {
 			echo "<tr>
