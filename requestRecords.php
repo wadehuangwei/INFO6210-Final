@@ -11,7 +11,6 @@ if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 } 
 $time = time() - 15;
-var_dump($time);
 $sql = "UPDATE `DeviceDelivery` SET `ShipDate`='$time' WHERE DeviceID = '500001'";
 $conn->query($sql);
 
@@ -107,7 +106,7 @@ $mdResult = $conn->query($sql);
 
 				// Prescription ID collum
 				// TODO: add prescription page
-				echo "<td><a href='/INFO6210-Final/prescription.php?PrescriptionID=>" . $row['PrescriptionID'] . "'>" . $row['PrescriptionID'] . "</td>";
+				echo "<td><a href='/INFO6210-Final/prescription.php?PrescriptionID=" . $row['PrescriptionID'] . "'>" . $row['PrescriptionID'] . "</td>";
 
 				// treatment result collum
 				// TODO: add feedbackTreatmentResult page
