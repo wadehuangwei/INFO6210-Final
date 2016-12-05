@@ -2,6 +2,7 @@
 session_start();
 //connect to database
 $db = mysqli_connect("localhost", "root", "", "healthcare");
+$hospitalID="800001";
 
 
 if (isset($_POST['register_btn']))
@@ -45,6 +46,16 @@ $_SESSION['username'] = $username;
 // header("location: login.php");//redirect to home page
 
 if($accountType == "Doctor"){
+
+ $sql = "SELECT UserID FROM UserAccount WHERE Username = '$username'";
+ $result_userId = mysqli_query($db, $sql);
+
+$row_userId = mysqli_fetch_assoc($result_userId);
+$doctorID = $row_userId['UserID'];
+
+ $sql_adddoctorId = "INSERT INTO Doctor(DoctorID, HospitalID) VALUES ('$doctorID', '$hospitalID')";
+ mysqli_query($db, $sql_adddoctorId);
+
  header("location: register.php");//redirect to home page
 } 
 
@@ -56,6 +67,7 @@ $result = mysqli_query($db, $sql);
 if(mysqli_num_rows($result) == 1){
         $row = mysqli_fetch_assoc($result);
         $patientID = $row['UserID'];
+
         $street = $row['Street'];
         $city = $row['City'];
         $state = $row['State'];
@@ -63,6 +75,7 @@ if(mysqli_num_rows($result) == 1){
         $maxID = '';
 
         $sql_wh = "SELECT Warehouse.WarehouseID, Address.Street, Address.City, Address.State FROM Warehouse INNER JOIN Address ON Address.AddressID = Warehouse.AddressID";
+
         $result_wh = mysqli_query($db, $sql_wh);
         while($row_wh = mysqli_fetch_assoc($result_wh)){
             $street_wh = $row_wh['Street'];
@@ -90,11 +103,11 @@ if(mysqli_num_rows($result) == 1){
             mysqli_query($db, $sql_update);
         }
         
-    } else
+    } 
+    else
     {
         $_SESSION['message'] = "User address doesn't exist.";
     }
-
 
 header("location: homePage.php");
 }
@@ -151,6 +164,7 @@ function GetDrivingDistance($lat1, $lat2, $long1, $long2)
     $time = $response_a['rows'][0]['elements'][0]['duration']['text'];
 
     return array('distance' => $dist, 'time' => $time);
+
 }
 ?>
 

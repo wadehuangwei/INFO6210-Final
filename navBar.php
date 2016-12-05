@@ -12,7 +12,7 @@ session_start();
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand">welcome <?php echo $_SESSION['username']; ?></a>
+    <a class="navbar-brand" > welcome <?php echo $_SESSION['username']; ?></a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -27,7 +27,7 @@ session_start();
           <li><a href="request.php">Doctor D</a></li>
           <li><a href="Department.php">Select the Department</a></li>
           <li class="divider"></li>
-          <li><a href="#">Separated link</a></li>
+          <li><a href="symptoms.php">Symptoms</a></li>
           <li class="divider"></li>
           <li><a href="#">One more separated link</a></li>
         </ul>
@@ -45,7 +45,9 @@ session_start();
         </form>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#">About Us</a></li>
+      <li><a href="aboutUs.html">About Us</a></li>
+      <li><a href="homePage.php">Home Page</a></li>
+
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Account<b class="caret"></b></a>
         <ul class="dropdown-menu">
