@@ -10,6 +10,10 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 } 
+$time = time() - 15;
+var_dump($time);
+$sql = "UPDATE `DeviceDelivery` SET `ShipDate`='$time' WHERE DeviceID = '500001'";
+$conn->query($sql);
 
 $sql = "SELECT DateofRequest, MedicalRecordNumber, PatientID, PrescriptionID, treatmentresult FROM MedicalRecord";
 $mdResult = $conn->query($sql);
