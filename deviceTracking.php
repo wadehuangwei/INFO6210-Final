@@ -64,6 +64,7 @@
 
     
     $deviceID = mysql_real_escape_string($_GET['deviceID']);
+    echo "DeviceID is: " . $deviceID;
     //$deviceID = 1;
     $sql_device = "SELECT ShipDate FROM DeviceDelivery WHERE DeviceID = '$deviceID'";
     $result_device = $conn->query($sql_device);

@@ -58,12 +58,14 @@ $mdResult = $conn->query($sql);
 		if ($mdResult->num_rows > 0) {
 			// output data of each row
 			while($row = $mdResult->fetch_assoc()) {
-				$sql = "EXISTS (SELECT * FROM MedicalRecordHasTest WHERE MedicalRecordNumber = " . $row['MedicalRecordNumber']. ")";
+				$sql = "SELECT EXISTS(SELECT TestNumber FROM MedicalReordHasTest WHERE MedicalRecordNumber=" . $row['MedicalRecordNumber']. ")";
 				$needTest = $conn->query($sql);
 				$testNumber = -1;
 				if ($needTest) {
-					$sql = "SELECT * FROM MedicalRecordHasTest WHERE MedicalRecordNumber = " . $row['MedicalRecordNumber'];
-					$testNumber = $conn->query($sql);
+					$sql = "SELECT * FROM MedicalReordHasTest WHERE MedicalRecordNumber = " . $row['MedicalRecordNumber'];
+					$result = $conn->query($sql);
+					$testNumberArray = $result->fetch_assoc();
+					$testNumber = $testNumberArray['TestNumber'];
 				}
 
 				echo 	"<tr>
@@ -85,9 +87,12 @@ $mdResult = $conn->query($sql);
 				}
 
 				// Test No. (Device Tracking) collum
+				$sql = "SELECT DeviceID from Test WHERE TestNumber='$testNumber'";
+				$result = $conn->query($sql);
+				$deviceID = $result->fetch_assoc();
 				if ($needTest) {
 					// TODO: add tracking page
-					echo "<td><a href='/INFO6210-Final/tracking.php?testNumber=" . $testNumber . "'>GO</a></td>";
+					echo "<td><a href='/INFO6210-Final/deviceTracking.php?deviceID=" . $deviceID['DeviceID'] . "'>GO</a></td>";
 				} else {
 					echo "<td>N/A</td>";
 				}
