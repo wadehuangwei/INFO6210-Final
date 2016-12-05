@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2016-12-04 21:59:36
+-- Generation Time: 2016-12-05 05:51:47
 -- 服务器版本： 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -42,7 +42,6 @@ CREATE TABLE `Address` (
 --
 
 INSERT INTO `Address` (`AddressID`, `Street`, `City`, `State`, `Country`, `Zipcode`) VALUES
-(700011, '', '', '', '', ''),
 (700010, '1153 Centre Street', 'Boston', 'MA', 'USA', '02130'),
 (700003, '1167 Boylston Street', 'Boston', 'MA', 'USA', '02215'),
 (700005, '16 Gold Star Rd', 'Cambridge', 'MA', 'USA', '02140'),
@@ -112,6 +111,13 @@ CREATE TABLE `DeviceDelivery` (
   `DeviceID` int(11) NOT NULL,
   `ShipDate` varchar(40) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- 转存表中的数据 `DeviceDelivery`
+--
+
+INSERT INTO `DeviceDelivery` (`DeviceID`, `ShipDate`) VALUES
+(500001, '1480913239');
 
 -- --------------------------------------------------------
 
@@ -321,6 +327,13 @@ CREATE TABLE `MedicalReordHasTest` (
   `TestNumber` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- 转存表中的数据 `MedicalReordHasTest`
+--
+
+INSERT INTO `MedicalReordHasTest` (`MedicalRecordNumber`, `TestNumber`) VALUES
+(1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -331,6 +344,13 @@ CREATE TABLE `MedicaRecordHasSymphtoms` (
   `MedicalRecordNumber` int(40) NOT NULL,
   `SymphtomID` int(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- 转存表中的数据 `MedicaRecordHasSymphtoms`
+--
+
+INSERT INTO `MedicaRecordHasSymphtoms` (`MedicalRecordNumber`, `SymphtomID`) VALUES
+(1, 200002);
 
 -- --------------------------------------------------------
 
@@ -443,6 +463,25 @@ CREATE TABLE `Test` (
   `TestResult` varchar(80) CHARACTER SET utf8 DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- 转存表中的数据 `Test`
+--
+
+INSERT INTO `Test` (`TestNumber`, `PatientID`, `DeviceID`, `PrescriptionID`, `TestResult`) VALUES
+(1, 1, 500001, 1, '');
+
+--
+-- 触发器 `Test`
+--
+DELIMITER $$
+CREATE TRIGGER `Device_Return` AFTER UPDATE ON `Test` FOR EACH ROW UPDATE Warehouse SET Inventory = Inventory + 1 WHERE WarehouseID = (SELECT NearestWarehouseID FROM Patient WHERE PatientID = NEW.PatientID)
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `Device_Ship` AFTER INSERT ON `Test` FOR EACH ROW UPDATE Warehouse SET Inventory = Inventory - 1 WHERE WarehouseID = (SELECT NearestWarehouseID FROM Patient WHERE PatientID = NEW.PatientID)
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -466,7 +505,7 @@ CREATE TABLE `UserAccount` (
 --
 
 INSERT INTO `UserAccount` (`UserID`, `Username`, `Password`, `FirstName`, `LastName`, `Phone`, `Email`, `AccountType`, `AddressID`) VALUES
-(1, 'huangwei', '934b535800b1cba8f96a5d72f72f1611', '', '', '', 'way.hooah@gmail.com', '', 700011);
+(1, 'huangwei', '934b535800b1cba8f96a5d72f72f1611', '', '', '', 'way.hooah@gmail.com', '', 700010);
 
 -- --------------------------------------------------------
 
@@ -652,7 +691,7 @@ ALTER TABLE `Warehouse`
 -- 使用表AUTO_INCREMENT `Address`
 --
 ALTER TABLE `Address`
-  MODIFY `AddressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=700012;
+  MODIFY `AddressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=700011;
 --
 -- 使用表AUTO_INCREMENT `Device`
 --
@@ -712,7 +751,7 @@ ALTER TABLE `Symphtom`
 -- 使用表AUTO_INCREMENT `Test`
 --
 ALTER TABLE `Test`
-  MODIFY `TestNumber` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `TestNumber` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- 使用表AUTO_INCREMENT `UserAccount`
 --
