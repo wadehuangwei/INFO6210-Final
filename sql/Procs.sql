@@ -23,3 +23,16 @@ BEGIN
 	INSERT INTO UserAccount(Username, Email, Password, AddressID, AccountType) VALUES (username, email, password, addrID, acntType);
 END //
 DELIMITER ;
+
+/*==============================================================*/
+/* Proc: avgWeight					 							*/
+/*==============================================================*/
+DELIMITER //
+DROP PROCEDURE IF EXISTS avgWeight //
+CREATE PROCEDURE `avgWeight` ()
+BEGIN
+	SELECT AVG(Weight)
+	from HealthRecord
+	group by PatientID;
+END //
+DELIMITER ;
