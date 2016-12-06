@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 06, 2016 at 04:47 AM
+-- Generation Time: Dec 06, 2016 at 05:41 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -351,7 +351,7 @@ CREATE TABLE `Prescription` (
   `PrescriptionID` int(11) NOT NULL,
   `DoctorID` int(11) DEFAULT NULL,
   `PrescriptionDescription` varchar(80) CHARACTER SET utf8 DEFAULT NULL,
-  `DiseaseID` int(11) NOT NULL
+  `DiseaseID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
