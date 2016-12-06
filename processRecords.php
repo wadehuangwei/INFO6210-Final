@@ -40,7 +40,8 @@ $mdResult = $conn->query($sql);
 	</style>
 </head>
 <body>
-	<a href='homepage.php'>Home Page</a>
+	<a href='processRecords.php'>Home Page</a>
+	<a href='logout.php'>Logout</a>
 	<h1>All Requests</h1><br>
 	<table>
 		<tr>
