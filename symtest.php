@@ -6,6 +6,7 @@
 <?php require 'diseaseArray.php';?>
 
 <?php
+
 session_start();
 //connect to database
 $db = mysqli_connect("localhost", "root", "", "healthcare");
@@ -14,7 +15,7 @@ $username= $_SESSION['username'];
 $symptoms="";
 $output = '';
 
-if(isset($_POST["submit"]))
+if(isset($_POST["submit1"]))
 {
 
 $sql = "SELECT UserID FROM UserAccount WHERE Username = '$username'";
@@ -85,20 +86,25 @@ while($row = mysqli_fetch_array($result_allSy, MYSQLI_ASSOC))
 }
 
 	// echo '<p> ' .$output. '</p>';
-
 if($output==$a1 || $output==$a2 || $output==$a3 || $output==$a4 ||$output==$a5){
+
+  if($output==$a1){
+
+    $sql_addAutoPri = "INSERT INTO Prescription(DiseaseID) VALUES ('$disease1')";       
+       mysqli_query($db, $sql_addAutoPri);
+
+  }
 
      // echo '<p> A2: <br>' .$a2. '</p>';
      // echo '<p> A3: <br>' .$a3. '</p>';
 	 echo '<p> output: <br>' .$output. '</p>';
-
-
+   
 }
 
-else{
-   header("location: sendRequest.php");//redirect to home page
+else
+{  
+   header("location: sendRequest.php");//redirect to  page
 }
-
 
 }
 

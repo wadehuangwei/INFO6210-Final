@@ -23,11 +23,11 @@
 
 <!--   <h1>Responsive Organization Chart</h1>
  -->  <figure class="org-chart cf">
-    <ul style= "font-size: 0.6em" class="administration">
+     <ul style= "font-size: 0.6em" class="administration">
       <li>            
         <ul class="director">
           <li>
-            <a href="#"><span>Director</span></a>
+            <a href="#"><span>MOUNT AUBURN HOSPITAL</span></a>
             <ul class="subdirector">
               <li><a href="#"><span>Assistante Director</span></a></li>
             </ul>
@@ -37,8 +37,8 @@
               <li class="department dep-a">
                 <a href="#"><span>Department A</span></a>
                 <ul class="sections">
-                  <li class="section"><a href="request2.php"><span>Section A1</span></a></li>
-                  <li class="section"><a href="#"><span>Section A2</span></a></li>
+                  <li class="section"><a href="request3.php"><span>Section A1</span></a></li>
+                  <li class="section"><a href="request2.php"><span>Section A2</span></a></li>
                   <li class="section"><a href="#"><span>Section A3</span></a></li>
                   <li class="section"><a href="#"><span>Section A4</span></a></li>
                   <li class="section"><a href="#"><span>Section A5</span></a></li>

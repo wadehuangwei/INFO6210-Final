@@ -106,7 +106,7 @@ if (!isset($_SESSION['username'])) {
 				<img src="c1.jpg">
 				<div class="carousel-caption">
 					<h3>Initiate a Medical Request</h3>
-					<h3><a href="request.php"  class="label label-primary" >Find More</a></h3>
+					<h3><a href="request3.php"  class="label label-primary" >Find More</a></h3>
 
 				</div>
 			</div><!-- End Item -->
