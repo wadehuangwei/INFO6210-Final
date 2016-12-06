@@ -20,6 +20,6 @@ BEGIN
 	DECLARE addrID INT DEFAULT 0;
 	INSERT INTO Address(Street, City, State, Zipcode) VALUES (street, city, state, zip);
 	SELECT AddressID INTO addrID FROM Address WHERE Street = street AND City = city AND State = state AND Zipcode = zip LIMIT 1;
-	INSERT INTO UserAccount(Username, Email, Password, AddressID, AccountType) VALUES (username, email, password, addrID, accountType);
+	INSERT INTO UserAccount(Username, Email, Password, AddressID, AccountType) VALUES (username, email, password, addrID, acntType);
 END //
 DELIMITER ;

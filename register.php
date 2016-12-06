@@ -25,20 +25,26 @@ if (isset($_POST['register_btn']))
 	//create user
 
 $password = md5($password); //hash password before storing for security purposes
-$sql_addr = "INSERT INTO Address(Street, City, State, Zipcode) VALUES ('$street', '$city', '$state', '$zipcode')";
-mysqli_query($db, $sql_addr);
+
+// $sql_addr = "INSERT INTO Address(Street, City, State, Zipcode) VALUES ('$street', '$city', '$state', '$zipcode')";
+// mysqli_query($db, $sql_addr);
 
 
-$sql_addrID = "SELECT * FROM Address WHERE Street = '$street' AND City = '$city' AND State = '$state' AND Zipcode = '$zipcode' LIMIT 1";
+// $sql_addrID = "SELECT * FROM Address WHERE Street = '$street' AND City = '$city' AND State = '$state' AND Zipcode = '$zipcode' LIMIT 1";
 
-$result_addrID = mysqli_query($db, $sql_addrID);
+// $result_addrID = mysqli_query($db, $sql_addrID);
 
-$row_addrID = mysqli_fetch_assoc($result_addrID);
-$addressID = $row_addrID['AddressID'];
+// $row_addrID = mysqli_fetch_assoc($result_addrID);
+// $addressID = $row_addrID['AddressID'];
 
 
-$sql_user = "INSERT INTO UserAccount(Username, Email, Password, AddressID, AccountType) VALUES ('$username', '$email', '$password', '$addressID','$accountType')";
-mysqli_query($db, $sql_user);
+// $sql_user = "INSERT INTO UserAccount(Username, Email, Password, AddressID, AccountType) VALUES ('$username', '$email', '$password', '$addressID','$accountType')";
+// mysqli_query($db, $sql_user);
+
+if (!mysqli_query($db, "SET @street='$street', @city='$city', @state='$state', @zip='$zipcode', @username='$username', @email='$email', @password='$password', @acntType='$accountType'") 
+	|| !mysqli_query($db, "CALL insert_patient(@street, @city, @state, @zip, @username, @email, @password, @acntType)")) {
+	echo "CALL insert_patient failed";
+}
 
 $_SESSION['message'] = "Your are now logged in";
 $_SESSION['username'] = $username;
