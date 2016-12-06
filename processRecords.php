@@ -40,8 +40,7 @@ $mdResult = $conn->query($sql);
 	</style>
 </head>
 <body>
-	<a href='processRecords.php'>Home Page</a>
-	<a href='logout.php'>Logout</a>
+	<a href='homepage.php'>Home Page</a>
 	<h1>All Requests</h1><br>
 	<table>
 		<tr>
@@ -57,12 +56,15 @@ $mdResult = $conn->query($sql);
 		if ($mdResult->num_rows > 0) {
 			// output data of each row
 			while($row = $mdResult->fetch_assoc()) {
-				$sql = "EXISTS (SELECT * FROM MedicalRecordHasTest WHERE MedicalRecordNumber = " . $row['MedicalRecordNumber']. ")";
+				$sql = "SELECT COUNT(1) AS Count FROM MedicalReordHasTest WHERE MedicalRecordNumber = " . $row['MedicalRecordNumber']. "";
 				$needTest = $conn->query($sql);
+				$needTest = $needTest->fetch_assoc();
 				$testNumber = -1;
-				if ($needTest) {
-					$sql = "SELECT * FROM MedicalRecordHasTest WHERE MedicalRecordNumber = " . $row['MedicalRecordNumber'];
+				if (intval($needTest['Count']) ==1) {
+					$sql = "SELECT * FROM MedicalReordHasTest WHERE MedicalRecordNumber = " . $row['MedicalRecordNumber'];
 					$testNumber = $conn->query($sql);
+					$testNumber = $testNumber->fetch_assoc();
+					$testNumber = $testNumber['TestNumber'];
 				}
 				// TODO: add prescription.php page
 				echo 	"<tr>
@@ -71,23 +73,23 @@ $mdResult = $conn->query($sql);
 				<td><a href='/INFO6210-Final/patient.php?PatientID=" . $row['PatientID'] . "'>" . $row['PatientID'] . "</td>";
 
 				// Symphtoms collum
-				// $sql = "SELECT DiseaseID FROM Prescription WHERE PrescriptionID=" . $row['PrescriptionID'];
-				// $result = $conn->query($sql);
-				// $diseaseID = $result->fetch_assoc();
-				echo "<td><a href='/INFO6210-Final/checkSymptoms.php?MedicalRecordNumber=" . $row['MedicalRecordNumber'] . "'>Details</a></td>";
+				$sql = "SELECT DiseaseID FROM Prescription WHERE PrescriptionID=" . $row['PrescriptionID'];
+				$result = $conn->query($sql);
+				$diseaseID = $result->fetch_assoc();
+				echo "<td><a href='/INFO6210-Final/symphtoms.php?MedicalRecordNumber=" . $row['MedicalRecordNumber'] . "'>Details</a></td>";
 
 				// PresccriptionID collum
 				echo "<td><a href='/INFO6210-Final/prescription.php?PrescriptionID=" . $row['PrescriptionID'] . "'>" . $row['PrescriptionID'] . "</td>";
 
 				// Need test? collum
-				if ($needTest) {
-					echo "<td>Yes</td>";
+				if (intval($needTest['Count']) == 1) {
+					echo "<td><a href='/INFO6210-Final/device.php?PrescriptionID=" . $row['PrescriptionID'] . "&PatientID=" . $row['PatientID'] . "&MedicalRecordNumber=" . $row['MedicalRecordNumber'] . "'>Yes</a></td>";
 				} else {
 					echo "<td>No</td>";
 				}
 
 				// Test No. (Device Tracking) collum
-				if ($needTest) {
+				if (intval($needTest['Count']) == 1) {
 					// TODO: add tracking page
 					echo "<td><a href='/INFO6210-Final/tracking.php?testNumber=" . $testNumber . "'>GO</a></td>";
 				} else {
