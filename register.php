@@ -2,6 +2,17 @@
 session_start();
 //connect to database
 $db = mysqli_connect("localhost", "root", "", "healthcare");
+function begin(){
+    mysqli_query($db, "BEGIN");
+}
+
+function commit(){
+    mysqli_query($db, "COMMIT");
+}
+
+function rollback(){
+    mysqli_query($db, "ROLLBACK");
+}
 $hospitalID="800001";
 
 
@@ -52,15 +63,20 @@ $_SESSION['username'] = $username;
 // header("location: login.php");//redirect to home page
 
 if($accountType == "Doctor"){
-
+	
 	$sql = "SELECT UserID FROM UserAccount WHERE Username = '$username'";
 	$result_userId = mysqli_query($db, $sql);
-
 	$row_userId = mysqli_fetch_assoc($result_userId);
 	$doctorID = $row_userId['UserID'];
 
+	begin();
 	$sql_adddoctorId = "INSERT INTO Doctor(DoctorID, HospitalID) VALUES ('$doctorID', '$hospitalID')";
-	mysqli_query($db, $sql_adddoctorId);
+	$result = mysqli_query($db, $sql_adddoctorId);
+	if (!$result) {
+		rollback();
+		echo "transaction rolledback";
+		exit;
+	}
 
  header("location: processRecords.php");//redirect to home page
 } 
