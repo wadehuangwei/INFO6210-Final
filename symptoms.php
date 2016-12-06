@@ -249,7 +249,7 @@
                             </div>
                         </div>
 
-                      <input type="submit" name="submit" class="btn btn-primary" value="submit"/>
+                      <input type="submit" name="submit1" class="btn btn-primary" value="submit"/>
 
                     </form>
                     
