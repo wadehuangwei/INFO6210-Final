@@ -71,10 +71,10 @@ $mdResult = $conn->query($sql);
 				<td><a href='/INFO6210-Final/patient.php?PatientID=" . $row['PatientID'] . "'>" . $row['PatientID'] . "</td>";
 
 				// Symphtoms collum
-				$sql = "SELECT DiseaseID FROM Prescription WHERE PrescriptionID=" . $row['PrescriptionID'];
-				$result = $conn->query($sql);
-				$diseaseID = $result->fetch_assoc();
-				echo "<td><a href='/INFO6210-Final/symphtoms.php?MedicalRecordNumber=" . $row['MedicalRecordNumber'] . "'>Details</a></td>";
+				// $sql = "SELECT DiseaseID FROM Prescription WHERE PrescriptionID=" . $row['PrescriptionID'];
+				// $result = $conn->query($sql);
+				// $diseaseID = $result->fetch_assoc();
+				echo "<td><a href='/INFO6210-Final/checkSymptoms.php?MedicalRecordNumber=" . $row['MedicalRecordNumber'] . "'>Details</a></td>";
 
 				// PresccriptionID collum
 				echo "<td><a href='/INFO6210-Final/prescription.php?PrescriptionID=" . $row['PrescriptionID'] . "'>" . $row['PrescriptionID'] . "</td>";

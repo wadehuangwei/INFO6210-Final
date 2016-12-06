@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 06, 2016 at 05:41 AM
+-- Generation Time: Dec 06, 2016 at 06:00 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -161,6 +161,7 @@ CREATE TABLE `Disease` (
 --
 
 INSERT INTO `Disease` (`DiseaseID`, `DiseaseName`) VALUES
+(0, 'unknown'),
 (100001, 'Food Poisoning'),
 (100002, 'Pneumonia'),
 (100003, 'Diabetes'),
@@ -656,7 +657,7 @@ ALTER TABLE `DeviceType`
 -- AUTO_INCREMENT for table `Disease`
 --
 ALTER TABLE `Disease`
-  MODIFY `DiseaseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100006;
+  MODIFY `DiseaseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100007;
 --
 -- AUTO_INCREMENT for table `DiseaseHasSymphtom`
 --
