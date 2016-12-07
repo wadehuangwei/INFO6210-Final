@@ -19,6 +19,10 @@ $disease0='';
 $last_id2 = '';
 $last_id ='';
 
+$phptime=time();
+$mysqlitime = date ("Y-m-d H:i:s", $phptime);
+
+
 if(isset($_POST["submit1"]))
 {
 
@@ -30,15 +34,16 @@ $patientID = $row_userId['UserID'];
 
 $sql_addPri = "INSERT INTO Prescription(DiseaseID) VALUES ('$disease0') ";       
        // mysqli_query($db, $sql_addAutoPri);
-       if(mysqli_query($db, $sql_addPri))
-       
+       if(mysqli_query($db, $sql_addPri))      
        {
         $last_id2 = mysqli_insert_id($db);
         echo "lst insert Id PriscriptionID is: " . $last_id2;
 
        }
 
-$sql_addMedicalRecord = "INSERT INTO MedicalRecord(PatientID,PrescriptionID) VALUES ('$patientID','$last_id2') ";
+$sql_addMedicalRecord = "INSERT INTO MedicalRecord(PatientID,PrescriptionID,DateOfRequest) 
+VALUES ('$patientID','$last_id2','$mysqlitime') ";
+
 if(mysqli_query($db, $sql_addMedicalRecord))
 { 
 
@@ -87,7 +92,6 @@ if(mysqli_query($db, $sql_addMedicalRecord))
        // header("location: symtest.php");       
 
 $sql_allSy = "SELECT MedicaRecordHasSymphtoms.SymphtomID, Symphtom.Description FROM MedicaRecordHasSymphtoms INNER JOIN Symphtom ON MedicaRecordHasSymphtoms.SymphtomID = Symphtom.SymphtomID WHERE MedicaRecordHasSymphtoms.MedicalRecordNumber = '$last_id'";
-
 $result_allSy = mysqli_query($db, $sql_allSy);
 
 
@@ -117,13 +121,16 @@ if($output==$a2)
 
     $sql_addAutoPri = "UPDATE Prescription SET  DiseaseID = '$disease2' WHERE PrescriptionID = '$last_id2' " ;       
        mysqli_query($db, $sql_addAutoPri);
-  }
+       header("location: mailAutoReults.php");//redirect to  page
+}
 
 if($output==$a3)
   {
 
     $sql_addAutoPri = "UPDATE Prescription SET  DiseaseID = '$disease3' WHERE PrescriptionID = '$last_id2' " ;       
        mysqli_query($db, $sql_addAutoPri);
+       header("location: mailAutoReults.php");//redirect to  page
+
   }
 
   if($output==$a4)
@@ -131,6 +138,8 @@ if($output==$a3)
 
     $sql_addAutoPri = "UPDATE Prescription SET  DiseaseID = '$disease4' WHERE PrescriptionID = '$last_id2' " ;       
        mysqli_query($db, $sql_addAutoPri);
+       header("location: mailAutoReults.php");//redirect to  page
+
   }
 
   if($output==$a5)
@@ -138,6 +147,8 @@ if($output==$a3)
 
     $sql_addAutoPri = "UPDATE Prescription SET  DiseaseID = '$disease5' WHERE PrescriptionID = '$last_id2' " ;       
        mysqli_query($db, $sql_addAutoPri);
+       header("location: mailAutoReults.php");//redirect to  page
+
   }
 
 	 echo '<p> output: <br>' .$output. '</p>';
