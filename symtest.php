@@ -15,6 +15,10 @@ $username= $_SESSION['username'];
 $symptoms="";
 $output = '';
 
+$disease0='';
+$last_id2 = '';
+$last_id ='';
+
 if(isset($_POST["submit1"]))
 {
 
@@ -24,14 +28,23 @@ $result_userId = mysqli_query($db, $sql);
 $row_userId = mysqli_fetch_assoc($result_userId);
 $patientID = $row_userId['UserID'];
 
-$sql_addMedicalRecord = "INSERT INTO MedicalRecord(PatientID) VALUES ('$patientID')";
-mysqli_query($db, $sql_addMedicalRecord);
+$sql_addPri = "INSERT INTO Prescription(DiseaseID) VALUES ('$disease0') ";       
+       // mysqli_query($db, $sql_addAutoPri);
+       if(mysqli_query($db, $sql_addPri))
+       
+       {
+        $last_id2 = mysqli_insert_id($db);
+        echo "lst insert Id PriscriptionID is: " . $last_id2;
 
-$sql_MedicalID = "SELECT MedicalRecordNumber FROM MedicalRecord WHERE PatientID = '$patientID' ";
+       }
 
-$result_MedicalID = mysqli_query($db, $sql_MedicalID);
-$row_MedicalID = mysqli_fetch_assoc($result_MedicalID); 
-$medicalID = $row_MedicalID['MedicalRecordNumber'];  
+$sql_addMedicalRecord = "INSERT INTO MedicalRecord(PatientID,PrescriptionID) VALUES ('$patientID','$last_id2') ";
+if(mysqli_query($db, $sql_addMedicalRecord))
+{ 
+
+  $last_id = mysqli_insert_id($db);
+  echo "last insert Id is: " . $last_id;
+
 
     if(!empty($_POST["symptoms"]))
    {
@@ -58,22 +71,23 @@ $medicalID = $row_MedicalID['MedicalRecordNumber'];
        $row_DrugName = mysqli_fetch_assoc($result_DrugName);
        $drugName = $row_DrugName['DrugName'];    
 
-       $sql_addSymp = "INSERT INTO MedicaRecordHasSymphtoms(MedicalRecordNumber, SymphtomID) VALUES ('$medicalID','$symphtomID')";       
+       $sql_addSymp = "INSERT INTO MedicaRecordHasSymphtoms(MedicalRecordNumber, SymphtomID) VALUES ('$last_id','$symphtomID')";      
+
        mysqli_query($db, $sql_addSymp);
 
        echo '<p> Symptom Id :' .$symphtomID. '</p>';
        echo '<p> Drug Id: ' .$drugId. '</p>';
        echo '<p> Drug Name:' .$drugName. '</p>';
-
 }
 
        echo '<p> User ID:' .$patientID. '</p>';
-       echo '<p> medical ID:' .$medicalID. '</p>';
+       echo '<p> medical ID:' .$last_id. '</p>';
        // $_SESSION['drugName']= $drugName;
        // $_SESSION['symphtomID']= $symphtomID;
        // header("location: symtest.php");       
 
-$sql_allSy = "SELECT MedicaRecordHasSymphtoms.SymphtomID, Symphtom.Description FROM MedicaRecordHasSymphtoms INNER JOIN Symphtom ON MedicaRecordHasSymphtoms.SymphtomID = Symphtom.SymphtomID WHERE MedicaRecordHasSymphtoms.MedicalRecordNumber = '$medicalID'";
+$sql_allSy = "SELECT MedicaRecordHasSymphtoms.SymphtomID, Symphtom.Description FROM MedicaRecordHasSymphtoms INNER JOIN Symphtom ON MedicaRecordHasSymphtoms.SymphtomID = Symphtom.SymphtomID WHERE MedicaRecordHasSymphtoms.MedicalRecordNumber = '$last_id'";
+
 $result_allSy = mysqli_query($db, $sql_allSy);
 
 
@@ -84,27 +98,57 @@ while($row = mysqli_fetch_array($result_allSy, MYSQLI_ASSOC))
     
     // $outputSymId = $row['SymphtomID'];
 }
-
 	// echo '<p> ' .$output. '</p>';
-if($output==$a1 || $output==$a2 || $output==$a3 || $output==$a4 ||$output==$a5){
+if($output==$a1 || $output==$a2 || $output==$a3 || $output==$a4 ||$output==$a5)
 
-  if($output==$a1){
+{
 
-    $sql_addAutoPri = "INSERT INTO Prescription(DiseaseID) VALUES ('$disease1')";       
+  if($output==$a1)
+  {
+
+       $sql_addAutoPri = "UPDATE Prescription SET  DiseaseID = '$disease1' WHERE PrescriptionID = '$last_id2' " ;       
        mysqli_query($db, $sql_addAutoPri);
-
+       header("location: mailAutoReults.php");//redirect to  page
+       
   }
 
-     // echo '<p> A2: <br>' .$a2. '</p>';
-     // echo '<p> A3: <br>' .$a3. '</p>';
+if($output==$a2)
+  {
+
+    $sql_addAutoPri = "UPDATE Prescription SET  DiseaseID = '$disease2' WHERE PrescriptionID = '$last_id2' " ;       
+       mysqli_query($db, $sql_addAutoPri);
+  }
+
+if($output==$a3)
+  {
+
+    $sql_addAutoPri = "UPDATE Prescription SET  DiseaseID = '$disease3' WHERE PrescriptionID = '$last_id2' " ;       
+       mysqli_query($db, $sql_addAutoPri);
+  }
+
+  if($output==$a4)
+  {
+
+    $sql_addAutoPri = "UPDATE Prescription SET  DiseaseID = '$disease4' WHERE PrescriptionID = '$last_id2' " ;       
+       mysqli_query($db, $sql_addAutoPri);
+  }
+
+  if($output==$a5)
+  {
+
+    $sql_addAutoPri = "UPDATE Prescription SET  DiseaseID = '$disease5' WHERE PrescriptionID = '$last_id2' " ;       
+       mysqli_query($db, $sql_addAutoPri);
+  }
+
 	 echo '<p> output: <br>' .$output. '</p>';
-   
+
 }
 
 else
 {  
    header("location: sendRequest.php");//redirect to  page
 }
+
 
 }
 
@@ -116,6 +160,13 @@ else
 
 }
 
+// $_SESSION['last_id'] = $last_id;
+
+}
+// $db->close();
 
 ?>
+
+
+
 

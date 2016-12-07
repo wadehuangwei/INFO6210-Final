@@ -1,4 +1,3 @@
- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,11 +16,13 @@
 </head>
 
    <body ng-app="">
+   
                 <div class="container">                            
 
                 <form method="post" action="symtest.php"> 
                         <div class="step2">
-                            <div class="step-22">
+                            <div class="step-2">
+
                                 <h5><strong>What Symotoms Do You Have ?</strong></h5>
                                 <div class="row">
                                     <div class="col-md-4 col-xs-6">
@@ -194,61 +195,10 @@
                                         </label>
                                     </div>
                                 </div>
-                                <h5><strong>What Symotoms Do You Have ?</strong></h5>
-                                <div class="row">
-                                    <div class="col-md-4 col-xs-6">
-                                        <label>
-                                          <input type="checkbox" type="checkbox" name="symptoms[]" value="Cough"> Cough
-                                        </label>
-                                    </div>
-                                    <div class="col-md-4 col-xs-6">
-                                        <label>
-                                          <input type="checkbox" type="checkbox" name="symptoms[]" value="Blood in urine"> Blood in urine
-                                        </label>
-                                    </div>
-                                    <div class="col-md-4 col-xs-6">
-                                        <label>
-                                          <input type="checkbox" type="checkbox" name="symptoms[]" value="Blurry Vision">Blurry Vision
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4 col-xs-6">
-                                        <label>
-                                          <input type="checkbox" type="checkbox" name="symptoms[]" value="Cough"> Cough
-                                        </label>
-                                    </div>
-                                    <div class="col-md-4 col-xs-6">
-                                        <label>
-                                          <input type="checkbox" type="checkbox" name="symptoms[]" value="Blood in urine"> Blood in urine
-                                        </label>
-                                    </div>
-                                    <div class="col-md-4 col-xs-6">
-                                        <label>
-                                          <input type="checkbox" type="checkbox" name="symptoms[]" value="Blurry Vision">Blurry Vision
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4 col-xs-6">
-                                        <label>
-                                          <input type="checkbox" type="checkbox" name="symptoms[]" value="Cough"> Cough
-                                        </label>
-                                    </div>
-                                    <div class="col-md-4 col-xs-6">
-                                        <label>
-                                          <input type="checkbox" type="checkbox" name="symptoms[]" value="Blood in urine"> Blood in urine
-                                        </label>
-                                    </div>
-                                    <div class="col-md-4 col-xs-6">
-                                        <label>
-                                          <input type="checkbox" type="checkbox" name="symptoms[]" value="Blurry Vision">Blurry Vision
-                                        </label>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
-
+                      <br>
                       <input type="submit" name="submit1" class="btn btn-primary" value="submit"/>
 
                     </form>

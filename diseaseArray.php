@@ -79,20 +79,11 @@ while($row_diseaseSymp5 = mysqli_fetch_array($result_diseaseSymp5, MYSQLI_ASSOC)
 	$a5 .=$row_diseaseSymp5['SymphtomID']. '<br>';
 }
 
-     echo '<p> A1: <br>' .$a1. '</p>';
-     echo '<p> A2: <br>' .$a2. '</p>';
-     echo '<p> A3: <br>' .$a3. '</p>';
-     echo '<p> A4: <br>' .$a4. '</p>';
-     echo '<p> A5: <br>' .$a5. '</p>';
+     // echo '<p> A1: <br>' .$a1. '</p>';
+     // echo '<p> A2: <br>' .$a2. '</p>';
+     // echo '<p> A3: <br>' .$a3. '</p>';
+     // echo '<p> A4: <br>' .$a4. '</p>';
+     // echo '<p> A5: <br>' .$a5. '</p>';
 
-// if($a1==$a3 || $a2==$a3){
-
-//      echo '<p> A2: <br>' .$a2. '</p>';
-//      echo '<p> A3: <br>' .$a3. '</p>';
-// }
-// else{
-// 	     echo '<p> A1: <br>' .$a1. '</p>';
-
-// }
 
 ?>
