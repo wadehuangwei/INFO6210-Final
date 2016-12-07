@@ -25,21 +25,21 @@ $mdResult = $conn->query($sql);
 		Request Records
 	</title>
 	<style>
-	table {
-		font-family: arial, sans-serif;
-		border-collapse: collapse;
-		width: 100%;
-	}
+		table {
+			font-family: arial, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
+		}
 
-	td, th {
-		border: 1px solid #dddddd;
-		text-align: left;
-		padding: 8px;
-	}
+		td, th {
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+		}
 
-	tr:nth-child(even) {
-		background-color: #dddddd;
-	}
+		tr:nth-child(even) {
+			background-color: #dddddd;
+		}
 	</style>
 </head>
 <body>
@@ -141,10 +141,10 @@ $mdResult = $conn->query($sql);
 		} else {
 			echo "<tr>
 			<td>0 Results</td>
-			</tr>";
-		}
-		$conn->close();
-		?>
-	</table>
+		</tr>";
+	}
+	$conn->close();
+	?>
+</table>
 </body>
 </html>

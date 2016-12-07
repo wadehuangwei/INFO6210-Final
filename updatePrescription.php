@@ -40,33 +40,33 @@ $description = $row['PrescriptionDescription'];
 		Request Records
 	</title>
 	<style>
-	table {
-		font-family: arial, sans-serif;
-		border-collapse: collapse;
-		width: 100%;
-	}
+		table {
+			font-family: arial, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
+		}
 
-	td, th {
-		border: 1px solid #dddddd;
-		text-align: left;
-		padding: 8px;
-	}
+		td, th {
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+		}
 
-	tr:nth-child(even) {
-		background-color: #dddddd;
-	}
+		tr:nth-child(even) {
+			background-color: #dddddd;
+		}
 	</style>
 </head>
 <body>
 	<h1>Edit Prescription</h1>
 	<textarea rows="10" cols="80" name="description" form="inputform"><?php
-			if (!empty($description)) {
-				echo $description;
-			}
+		if (!empty($description)) {
+			echo $description;
+		}
 		?></textarea>
-	<form action="updatePrescription.php" id="inputform">
-		<input type="hidden" name="prescriptionID" value="<?php echo $prescriptionID ?>" />
-		<input type="submit">
-	</form>
+		<form action="updatePrescription.php" id="inputform">
+			<input type="hidden" name="prescriptionID" value="<?php echo $prescriptionID ?>" />
+			<input type="submit">
+		</form>
 	</body>
 	</html>
