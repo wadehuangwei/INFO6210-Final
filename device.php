@@ -97,18 +97,30 @@ if (isset($_POST['select_btn'])){
 	    $deviceID = mysql_real_escape_string($_POST['deviceID']);
 	    $patientID = mysql_real_escape_string($_POST['patientID']);
 	    $prescriptionID = mysql_real_escape_string($_POST['prescriptionID']);
+
 	    $sql_check = "SELECT COUNT(1) AS Count FROM MedicalReordHasTest WHERE MedicalRecordNumber = '$medicalRecordNumber' AND TestNumber IS NOT NULL";
         $result_check = $conn->query($sql_check);
         $row_check = $result_check->fetch_assoc();
+
         if(intval($row_check['Count']) == 0){
 	    $sql_test = "INSERT INTO Test(PatientID, DeviceID, PrescriptionID) VALUES (".$patientID.", ".$deviceID.", ".$prescriptionID.")";
         $conn->query($sql_test);
+
         $sql_getTest = "SELECT TestNumber FROM Test WHERE PatientID = ".$patientID." AND DeviceID = ".$deviceID." AND PrescriptionID = ".$prescriptionID."";
         $result_getTest = $conn->query($sql_getTest);
         $row_getTest = $result_getTest->fetch_assoc();
         $testNumber = $row_getTest['TestNumber'];
+        
         $sql_record = "INSERT INTO MedicalReordHasTest(MedicalRecordNumber, TestNumber) VALUES ('$medicalRecordNumber', '$testNumber')";
         $conn->query($sql_record);
+
+        $time = time();
+        $sql_delivery = "INSERT INTO DeviceDelivery(DeviceID, ShipDate) VALUES ('$deviceID','$time')";
+        $conn->query($sql_delivery);
+
+        $sql_delete = "DELETE FROM Device WHERE DeviceID = '$deviceID'";
+        $conn->query($sql_delete);
+
 
 }else{
 	//test already exists
