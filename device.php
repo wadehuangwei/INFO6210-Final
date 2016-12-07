@@ -107,7 +107,7 @@ if (isset($_POST['select_btn'])){
         $result_getTest = $conn->query($sql_getTest);
         $row_getTest = $result_getTest->fetch_assoc();
         $testNumber = $row_getTest['TestNumber'];
-        $sql_record = "UPDATE MedicalReordHasTest SET TestNumber = '$testNumber' WHERE MedicalRecordNumber = '$medicalRecordNumber'";
+        $sql_record = "INSERT INTO MedicalReordHasTest(MedicalRecordNumber, TestNumber) VALUES ('$medicalRecordNumber', '$testNumber')";
         $conn->query($sql_record);
 
 }else{

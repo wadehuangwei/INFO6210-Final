@@ -50,22 +50,13 @@ $mdResult = $conn->query($sql);
 			<th>Symphtoms</th>
 			<th>Prescription ID</th>
 			<th>Need test?</th>
-			<th>Test No. (Device Tracking)</th>
+			<th>Test Result</th>
 		</tr>
 		<?php
 		if ($mdResult->num_rows > 0) {
 			// output data of each row
 			while($row = $mdResult->fetch_assoc()) {
-				$sql = "SELECT COUNT(1) AS Count FROM MedicalReordHasTest WHERE MedicalRecordNumber = " . $row['MedicalRecordNumber']. "";
-				$needTest = $conn->query($sql);
-				$needTest = $needTest->fetch_assoc();
-				$testNumber = -1;
-				if (intval($needTest['Count']) ==1) {
-					$sql = "SELECT * FROM MedicalReordHasTest WHERE MedicalRecordNumber = " . $row['MedicalRecordNumber'];
-					$testNumber = $conn->query($sql);
-					$testNumber = $testNumber->fetch_assoc();
-					$testNumber = $testNumber['TestNumber'];
-				}
+
 				// TODO: add prescription.php page
 				echo 	"<tr>
 				<td>" . $row['MedicalRecordNumber'] . "</td>
@@ -79,20 +70,30 @@ $mdResult = $conn->query($sql);
 				echo "<td><a href='/INFO6210-Final/symphtoms.php?MedicalRecordNumber=" . $row['MedicalRecordNumber'] . "'>Details</a></td>";
 
 				// PresccriptionID collum
-				echo "<td><a href='/INFO6210-Final/prescription.php?PrescriptionID=" . $row['PrescriptionID'] . "'>" . $row['PrescriptionID'] . "</td>";
-
-				// Need test? collum
-				if (intval($needTest['Count']) == 1) {
-					echo "<td><a href='/INFO6210-Final/device.php?PrescriptionID=" . $row['PrescriptionID'] . "&PatientID=" . $row['PatientID'] . "&MedicalRecordNumber=" . $row['MedicalRecordNumber'] . "'>Yes</a></td>";
+				$sql_prescription = "SELECT PrescriptionDescription FROM Prescription WHERE PrescriptionID=" . $row['PrescriptionID'];
+				$result_prescription = $conn->query($sql_prescription);
+				$row_prescription = $result_prescription->fetch_assoc();
+				if ((!isset($row_prescription['PrescriptionDescription']) || trim($row_prescription['PrescriptionDescription'])==='')) {
+					echo "<td><a href='prescription.php?PrescriptionID=" . $row['PrescriptionID'] . "'>Create</a></td>";
 				} else {
-					echo "<td>No</td>";
+					echo "<td><a href='prescription.php?PrescriptionID=" . $row['PrescriptionID'] . "'>Update</a></td>";
 				}
 
-				// Test No. (Device Tracking) collum
-				if (intval($needTest['Count']) == 1) {
-					// TODO: add tracking page
-					echo "<td><a href='/INFO6210-Final/tracking.php?testNumber=" . $testNumber . "'>GO</a></td>";
-				} else {
+				// Need test? collum
+				
+				echo "<td><a href='device.php?PrescriptionID=" . $row['PrescriptionID'] . "&PatientID=" . $row['PatientID'] . "&MedicalRecordNumber=" . $row['MedicalRecordNumber'] . "'>Yes</a></td>";
+				
+				$sql = "SELECT COUNT(1) AS Count FROM MedicalReordHasTest WHERE MedicalRecordNumber = " . $row['MedicalRecordNumber']. "";
+				$needTest = $conn->query($sql);
+				$needTest = $needTest->fetch_assoc();
+				$testNumber = -1;
+				if (intval($needTest['Count']) ==1) {
+					$sql = "SELECT * FROM MedicalReordHasTest WHERE MedicalRecordNumber = " . $row['MedicalRecordNumber'];
+					$testNumber = $conn->query($sql);
+					$testNumber = $testNumber->fetch_assoc();
+					$testNumber = $testNumber['TestNumber'];
+					echo "<td><a href='/INFO6210-Final/checkTestResult.php?testNumber=".$testNumber."'>View</a></td>";
+				}else{
 					echo "<td>N/A</td>";
 				}
 				
