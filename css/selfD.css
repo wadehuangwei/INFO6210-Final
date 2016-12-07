@@ -79,7 +79,7 @@ body{
 }
 
 
-.administration ul a span{s
+.administration ul a span{
 	top: 50%;
 	margin-top: -0.7em;
 	display: block;
@@ -121,20 +121,20 @@ body{
 	height: 64px;
 	margin: 0 auto 92px auto;		
 	padding-top: 25px;
-	border-bottom: 4px solid #b3b3b3;
+	border-bottom: 4px solid white;
 	z-index: 1;	
 }
 
 .subdirector > li:first-child{
 	float: right;
 	right: 27.2%;
-	border-left: 4px solid #b3b3b3;
+	border-left: 4px solid white;
 }
 
 .departments > li:first-child{	
 	float: left;
 	left: 27.2%;
-	border-right: 4px solid #b3b3b3;	
+	border-right: 4px solid white;	
 }
 
 .subdirector > li:first-child a,
@@ -213,7 +213,7 @@ body{
 	position: absolute;
 	width: 0;
 	height: 22px;
-	border-left: 4px solid #b3b3b3;
+	border-left: 4px solid white;
 	z-index: 1;
 	top: -22px;
 	left: 50%;
@@ -245,7 +245,7 @@ body{
 		position: absolute;
 		width: 0;
 		height: 60px;
-		border-left: 4px solid #b3b3b3;
+		border-left: 4px solid white;
 		z-index: 1;
 		top: -60px;
 		left: 0%;

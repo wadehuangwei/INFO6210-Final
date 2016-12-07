@@ -14,16 +14,27 @@
 
 </head>
 
-<body ng-app="">
+<body style="background-color: #f0f0f5;" ng-app="">
 
 
 <div ng-include="'navBar.php'"></div>
 
-<div>
-<!-- <h2>Please C hoose the Department</h2>
- --><br>
+<div class="container">
+<div class="col-lg-12 text-left">
+                <h3 class="page-header">Select Department
+                    <small> / Frist Step</small>
+                </h3>
+                <ol class="breadcrumb">
+                    <li><a href="homePage.php">Home</a>
+                    </li>
+                    <li class="active">Select Department</li>
+                </ol>
 
-<br>
+                <br>
+    </div>
+    </div>
+<!-- <h2>Please C hoose the Department</h2>
+ -->
 <div ng-include="'selfD.php'"></div>
 
 <div>
