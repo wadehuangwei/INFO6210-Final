@@ -52,19 +52,20 @@ $mdResult = $conn->query($sql);
 			<th>Patient ID</th>
 			<th>Symphtoms</th>
 			<th>Need test?</th>
-			<th>Test No. (Device Tracking)</th>
+			<th>Device No. (Device Tracking)</th>
 			<th>Feedback Test Result</th>
-			<th>Prescription ID</th>
+			<th>Prescription</th>
 			<th>Feedback Treatment Result</th>
 		</tr>
 		<?php
 		if ($mdResult->num_rows > 0) {
 			// output data of each row
 			while($row = $mdResult->fetch_assoc()) {
-				$sql = "SELECT EXISTS(SELECT TestNumber FROM MedicalReordHasTest WHERE MedicalRecordNumber=" . $row['MedicalRecordNumber']. ")";
-				$needTest = $conn->query($sql);
+				$sql = "SELECT EXISTS(SELECT TestNumber FROM MedicalReordHasTest WHERE MedicalRecordNumber=" . $row['MedicalRecordNumber']. ") AS nt";
+				$result = $conn->query($sql);
+				$needTest = $result->fetch_assoc();
 				$testNumber = -1;
-				if ($needTest) {
+				if ($needTest['nt']) {
 					$sql = "SELECT * FROM MedicalReordHasTest WHERE MedicalRecordNumber = " . $row['MedicalRecordNumber'];
 					$result = $conn->query($sql);
 					$testNumberArray = $result->fetch_assoc();
@@ -83,38 +84,54 @@ $mdResult = $conn->query($sql);
 				echo "<td><a href='/INFO6210-Final/checkSymptoms.php?MedicalRecordNumber=" . $row['MedicalRecordNumber'] . "'>Details</a></td>";
 
 				// Need test? collum
-				if ($needTest) {
+				if ($needTest['nt']) {
 					echo "<td>Yes</td>";
 				} else {
 					echo "<td>No</td>";
 				}
 
-				// Test No. (Device Tracking) collum
+				// Device No. (Device Tracking) collum
 				$sql = "SELECT DeviceID from Test WHERE TestNumber='$testNumber'";
 				$result = $conn->query($sql);
 				$deviceID = $result->fetch_assoc();
-				if ($needTest) {
-					echo "<td><a href='/INFO6210-Final/deviceTracking.php?deviceID=" . $deviceID['DeviceID'] . "'>GO</a></td>";
+				if ($needTest['nt']) {
+					echo "<td><a href='/INFO6210-Final/deviceTracking.php?deviceID=" . $deviceID['DeviceID'] . "'>". $deviceID['DeviceID'] ."</a></td>";
 				} else {
 					echo "<td>N/A</td>";
 				}
 
 				// test result collum
-				$sql = "SELECT TestResult FROM test WHERE TestNumber='$testNumber'";
-				$result = $conn->query($sql);
-				$testResult = $result->fetch_assoc();
-				if ((!isset($testResult['TestResult']) || trim($testResult['TestResult'])==='')) {
-					echo "<td><a href='/INFO6210-Final/feedbackTestResult.php?testNumber=" . $testNumber . "'>Go</a></td>";
+				if ($needTest['nt']) {
+					$sql = "SELECT TestResult FROM test WHERE TestNumber='$testNumber'";
+					$result = $conn->query($sql);
+					$testResult = $result->fetch_assoc();
+					if ((!isset($testResult['TestResult']) || trim($testResult['TestResult'])==='')) {
+						echo "<td><a href='/INFO6210-Final/feedbackTestResult.php?testNumber=" . $testNumber . "'>Go</a></td>";
+					} else {
+						echo "<td><a href='/INFO6210-Final/feedbackTestResult.php?testNumber=" . $testNumber . "'>Update</a></td>";
+					}
 				} else {
-					echo "<td><a href='/INFO6210-Final/feedbackTestResult.php?testNumber=" . $testNumber . "'>Update</a></td>";
+					echo "<td>N/A</td>";
 				}
 
 				// Prescription ID collum
-				// TODO: add prescription page
-				echo "<td><a href='/INFO6210-Final/prescription.php?PrescriptionID=" . $row['PrescriptionID'] . "'>" . $row['PrescriptionID'] . "</td>";
+				$PrescriptionID = $row['PrescriptionID'];
+				$sql = "SELECT DiseaseID FROM Prescription WHERE PrescriptionID='$PrescriptionID'";
+				$result = $conn->query($sql);
+				$diseaseID = $result->fetch_assoc();
+				$isAuto = intval($diseaseID['DiseaseID']) != 0;
+
+				$sql = "SELECT PrescriptionDescription FROM Prescription WHERE PrescriptionID='$PrescriptionID'";
+				$result = $conn->query($sql);
+				$pd = $result->fetch_assoc();
+
+				if (!$isAuto && (!isset($pd['PrescriptionDescription']) || trim($pd['PrescriptionDescription'])==='')) {
+					echo "<td>Pending</td>";
+				} else {
+					echo "<td><a href='/INFO6210-Final/checkPrescription.php?MedicalRecordNumber=" . $row['MedicalRecordNumber'] . "'>Check</a></td>";
+				}
 
 				// treatment result collum
-				// TODO: add feedbackTreatmentResult page
 				if ((!isset($row['treatmentresult']) || trim($row['treatmentresult'])==='')) {
 					echo "<td><a href='/INFO6210-Final/feedbackTreatmentResult.php?medicalRecordNumber=" . $row['MedicalRecordNumber'] . "'>Go</a></td>";
 				} else {

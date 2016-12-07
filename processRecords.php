@@ -40,7 +40,7 @@ $mdResult = $conn->query($sql);
 	</style>
 </head>
 <body>
-	<a href='homepage.php'>Home Page</a>
+	<a href='processRecords.php'>Home Page</a>
 	<h1>All Requests</h1><br>
 	<table>
 		<tr>
@@ -67,16 +67,16 @@ $mdResult = $conn->query($sql);
 				$sql = "SELECT DiseaseID FROM Prescription WHERE PrescriptionID=" . $row['PrescriptionID'];
 				$result = $conn->query($sql);
 				$diseaseID = $result->fetch_assoc();
-				echo "<td><a href='/INFO6210-Final/symphtoms.php?MedicalRecordNumber=" . $row['MedicalRecordNumber'] . "'>Details</a></td>";
+				echo "<td><a href='/INFO6210-Final/checkSymptoms.php?MedicalRecordNumber=" . $row['MedicalRecordNumber'] . "'>Details</a></td>";
 
 				// PresccriptionID collum
 				$sql_prescription = "SELECT PrescriptionDescription FROM Prescription WHERE PrescriptionID=" . $row['PrescriptionID'];
 				$result_prescription = $conn->query($sql_prescription);
 				$row_prescription = $result_prescription->fetch_assoc();
 				if ((!isset($row_prescription['PrescriptionDescription']) || trim($row_prescription['PrescriptionDescription'])==='')) {
-					echo "<td><a href='prescription.php?PrescriptionID=" . $row['PrescriptionID'] . "'>Create</a></td>";
+					echo "<td><a href='updatePrescription.php?PrescriptionID=" . $row['PrescriptionID'] . "'>Create</a></td>";
 				} else {
-					echo "<td><a href='prescription.php?PrescriptionID=" . $row['PrescriptionID'] . "'>Update</a></td>";
+					echo "<td><a href='updatePrescription.php?PrescriptionID=" . $row['PrescriptionID'] . "'>Update</a></td>";
 				}
 
 				// Need test? collum

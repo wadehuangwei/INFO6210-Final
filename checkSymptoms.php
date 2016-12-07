@@ -39,7 +39,6 @@ $result = $conn->query($sql);
 	</style>
 </head>
 <body>
-	<a href='homepage.php'>Home Page</a>
 	<h1>Symphtoms</h1><br>
 	<ul>
 		<?php

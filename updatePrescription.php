@@ -58,17 +58,13 @@ $description = $row['PrescriptionDescription'];
 	</style>
 </head>
 <body>
-	<a href='homepage.php'>Home Page</a>  
-	<a href='processRecords.php'>  &lt;&lt;Back</a></br></br>
 	<h1>Edit Prescription</h1>
 	<textarea rows="10" cols="80" name="description" form="inputform"><?php
 			if (!empty($description)) {
 				echo $description;
-			}else{
-				echo "Please edit here.";
 			}
 		?></textarea>
-	<form action="prescription.php" id="inputform">
+	<form action="updatePrescription.php" id="inputform">
 		<input type="hidden" name="prescriptionID" value="<?php echo $prescriptionID ?>" />
 		<input type="submit">
 	</form>
