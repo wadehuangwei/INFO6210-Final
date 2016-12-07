@@ -88,7 +88,7 @@ if (!isset($_GET['code'])) {
 		// var_dump($heartRate);
 		echo '</pre>';
 
-		$provider->revoke($accessToken);
+		// $provider->revoke($accessToken);
 	} catch (\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e) {
 
 		// Failed to get the access token or user details.
@@ -124,7 +124,6 @@ if (!isset($_GET['code'])) {
 	</style>
 </head>
 <body>
-	<a href='homepage.php'>Home Page</a>
 	<h1>Profile:</h1><br>
 	<table>
 		<tr>
