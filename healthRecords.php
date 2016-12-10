@@ -105,6 +105,13 @@ if (!isset($_GET['code'])) {
 	<title>
 		Home
 	</title>
+
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>   
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/aboutUs.css">
+
 	<style>
 	table {
 		font-family: arial, sans-serif;
@@ -123,7 +130,12 @@ if (!isset($_GET['code'])) {
 	}
 	</style>
 </head>
-<body>
+<body ng-app="">
+
+<div ng-include="'navBar.php'"></div>       
+
+<div class="container text-center">
+
 	<h1>Profile:</h1><br>
 	<table>
 		<tr>
@@ -175,5 +187,9 @@ if (!isset($_GET['code'])) {
 	}
 	?>
 </table>
+</div>
+<div ng-include="'footer.html'"></div>
+
+
 </body>
 </html>

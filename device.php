@@ -38,6 +38,13 @@ $device = $conn->query($sql);
 	<title>
 		Devices
 	</title>
+
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>   
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/aboutUs.css">
+
 	<style>
 	table {
 		font-family: arial, sans-serif;
@@ -55,10 +62,29 @@ $device = $conn->query($sql);
 		background-color: #dddddd;
 	}
 	</style>
+
 </head>
-<body>
-	<a href='processRecords.php'>Process Records Page</a>
-	<h1>All Devices</h1><br>
+<body ng-app="">
+
+<div ng-include="'navBar.php'"></div>     
+
+<div class="container">
+
+<div class="col-lg-12 text-left">
+                <h3 class="page-header">All Devices
+                    <small> / Details</small>
+                </h3>
+
+                <ol class="breadcrumb">
+                    <li><a href="processRecords.php">Home</a>
+                    </li>
+                    <li class="active">Edit Prescription</li>
+
+                </ol>
+
+    <br>
+</div>
+
 	<?php 
 	    $sql_type = "SELECT * FROM DeviceType";
 	    $type = $conn->query($sql_type);
@@ -94,6 +120,7 @@ $device = $conn->query($sql);
 echo "</form>";
 
 if (isset($_POST['select_btn'])){
+
 	    $deviceID = mysql_real_escape_string($_POST['deviceID']);
 	    $patientID = mysql_real_escape_string($_POST['patientID']);
 	    $prescriptionID = mysql_real_escape_string($_POST['prescriptionID']);
@@ -129,5 +156,10 @@ if (isset($_POST['select_btn'])){
 
 $conn->close();
 	?>
+<br>
+	</div>
+
+		<div ng-include="'footer.html'"></div>
+
 </body>
 </html>

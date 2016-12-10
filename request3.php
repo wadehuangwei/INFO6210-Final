@@ -21,14 +21,14 @@
 
 <div class="container">
  <div class="col-lg-12 text-left">
-                <h3 class="page-header">Select Department
-                    <small> / Frist Step</small>
+                <h3 class="page-header">Select Symptoms
+                    <small> / Second Step</small>
                 </h3>
                 <ol class="breadcrumb">
                     <li><a href="homePage.php">Home</a>
                     </li>
-                    <li class="active"><?php echo "Disease1" ?></li>
-                    <li class="active">Add information</li>
+                    <li class="active">Section 1</li>
+                    <li class="active">Add Symptoms</li>
                 </ol>
     </div>
 

@@ -102,6 +102,13 @@ $conn->close();
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Device tracking</title>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>   
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/aboutUs.css">
+
     <style>
     html, body, #map-canvas {
         height: 100%;
@@ -142,10 +149,15 @@ $conn->close();
     google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 </head>
-<body>
+<body ng-app="">
+
+<div ng-include="'navBar.php'"></div>  
+
     <div id="clock">
      <h3>Your device will be delivered in <?php echo $secondsLeft; ?> seconds.</h3>
  </div>
  <div id="map-canvas"></div>
+
+
 </body>
 </html>

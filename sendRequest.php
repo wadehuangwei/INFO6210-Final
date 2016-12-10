@@ -23,21 +23,19 @@
 
     <div class="col-lg-12 text-left">
 
-                <h3 class="page-header">Select Department
-                    <small> / Frist Step</small>
+                <h3 class="page-header">Waiting for Doctor
+                    <small> / Complete</small>
                 </h3>
 
                 <ol class="breadcrumb">                
                     <li><a href="homePage.php">Home</a>
                     </li>
-                    <li class="active"><?php echo "Disease1" ?></li>
-                    <li class="active">Add information</li>
+                    <li class="active">Secton 1</li>
+                    <li class="active">Add Symptoms</li>
                     <li class="active">Complete</li>
                 </ol>
                 <br><br>
-    </div>
-   
-    
+    </div>  
 	</div>
 </div>
 

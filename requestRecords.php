@@ -24,27 +24,50 @@ $mdResult = $conn->query($sql);
 	<title>
 		Request Records
 	</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>   
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/aboutUs.css">
+
 	<style>
-		table {
-			font-family: arial, sans-serif;
-			border-collapse: collapse;
-			width: 100%;
-		}
+	table {
+		font-family: arial, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+	}
 
-		td, th {
-			border: 1px solid #dddddd;
-			text-align: left;
-			padding: 8px;
-		}
+	td, th {
+		border: 1px solid #dddddd;
+		text-align: left;
+		padding: 8px;
+	}
 
-		tr:nth-child(even) {
-			background-color: #dddddd;
-		}
+	tr:nth-child(even) {
+		background-color: #dddddd;
+	}
 	</style>
 </head>
-<body>
-	<a href='homepage.php'>Home Page</a>
-	<h1>My Requests</h1><br>
+<body ng-app="">
+
+<div ng-include="'navBar.php'"></div>       
+
+<div class="container">
+
+<div class="col-lg-12 text-left">
+                <h3 class="page-header">My Request
+                    <small> / History</small>
+                </h3>
+                
+                <ol class="breadcrumb">
+                    <li><a href="homePage.php">Home</a>
+                    </li>
+                    <li class="active">My Request</li>
+                </ol>
+
+    <br>
+    </div>
+
 	<table>
 		<tr>
 			<th>Medical Record No.</th>
@@ -141,10 +164,16 @@ $mdResult = $conn->query($sql);
 		} else {
 			echo "<tr>
 			<td>0 Results</td>
-		</tr>";
-	}
-	$conn->close();
-	?>
-</table>
+			</tr>";
+		}
+		$conn->close();
+		?>
+	</table>
+<br>
+<br>
+	</div>
+
+	<div ng-include="'footer.html'"></div>
+
 </body>
 </html>

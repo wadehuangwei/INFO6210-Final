@@ -18,20 +18,7 @@ session_start();
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
-      <li class="healthRecords.php"><a href="healthRecords.php">Health Record</a></li>
-
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Medical Request<b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="requestRecords.php">Self D</a></li>
-          <li><a href="request.php">Doctor D</a></li>
-          <li><a href="Department.php">Select the Department</a></li>
-          <li class="divider"></li>
-          <li><a href="symptoms.php">Symptoms</a></li>
-          <li class="divider"></li>
-          <li><a href="#">One more separated link</a></li>
-        </ul>
-      </li>
+      <li><a href="homePage.php">Home Page</a></li>
     </ul>
 
     <div class="col-sm-3 col-md-3">
@@ -45,17 +32,30 @@ session_start();
         </form>
     </div>
     <ul class="nav navbar-nav navbar-right">
+     <li class="healthRecords.php"><a href="healthRecords.php">Health Record</a></li>
+
+     <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Medical Request<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          
+          <li><a href="Department.php">One Stop Request</a></li>
+
+          <li class="divider"></li>
+          <li><a href="symptoms.php">Symptoms</a></li>
+
+          <li class="divider"></li>
+          <li><a href="#">One more separated link</a></li>
+        </ul>
+      </li>
+
       <li><a href="aboutUs.html">About Us</a></li>
-      <li><a href="homePage.php">Home Page</a></li>
 
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Account<b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="logout.php">Log Out</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
+          <li><a href="requestRecords.php">My History</a></li>
           <li class="divider"></li>
-          <li><a href="#">Separated link</a></li>
+          <li><a href="logout.php">Log Out</a></li>
         </ul>
       </li>
     </ul>

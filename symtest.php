@@ -6,12 +6,12 @@
 <?php require 'diseaseArray.php';?>
 
 <?php
-
 session_start();
 //connect to database
 $db = mysqli_connect("localhost", "root", "", "healthcare");
 
-$username= $_SESSION['username']; 
+$username= $_SESSION['username'];
+
 $symptoms="";
 $output = '';
 
@@ -77,12 +77,12 @@ if(mysqli_query($db, $sql_addMedicalRecord))
        $drugName = $row_DrugName['DrugName'];    
 
        $sql_addSymp = "INSERT INTO MedicaRecordHasSymphtoms(MedicalRecordNumber, SymphtomID) VALUES ('$last_id','$symphtomID')";      
-
        mysqli_query($db, $sql_addSymp);
 
        echo '<p> Symptom Id :' .$symphtomID. '</p>';
        echo '<p> Drug Id: ' .$drugId. '</p>';
-       echo '<p> Drug Name:' .$drugName. '</p>';
+       echo '<p> Drug Name:' .$drugName. '</p>';      
+
 }
 
        echo '<p> User ID:' .$patientID. '</p>';
@@ -99,9 +99,12 @@ while($row = mysqli_fetch_array($result_allSy, MYSQLI_ASSOC))
 {        
 	// $output .= $row['SymphtomID'] . ' ' .$row['Description'] . '<br>';
 	$output .= $row['SymphtomID'] . '<br>';
+  $outputSym .= $row['Description'] . '<br>';
     
     // $outputSymId = $row['SymphtomID'];
 }
+
+
 	// echo '<p> ' .$output. '</p>';
 if($output==$a1 || $output==$a2 || $output==$a3 || $output==$a4 ||$output==$a5)
 
@@ -112,8 +115,21 @@ if($output==$a1 || $output==$a2 || $output==$a3 || $output==$a4 ||$output==$a5)
 
        $sql_addAutoPri = "UPDATE Prescription SET  DiseaseID = '$disease1' WHERE PrescriptionID = '$last_id2' " ;       
        mysqli_query($db, $sql_addAutoPri);
+
+       $sql_allDrug = "SELECT Drug.DrugName FROM Drug 
+       INNER JOIN Symphtom ON Drug.DrugID = Symphtom.DrugID 
+       INNER JOIN DiseaseHasSymphtom ON DiseaseHasSymphtom.SymphtomID = Symphtom.SymphtomID 
+       WHERE DiseaseHasSymphtom.DiseaseID = '$disease1'";
+       $result_allDrug = mysqli_query($db, $sql_allDrug);
+
+      while($row = mysqli_fetch_array($result_allDrug, MYSQLI_ASSOC))
+       {        
+          $outputDrug .= $row['DrugName'] . '<br>';
+    
+       }
+         
        header("location: mailAutoReults.php");//redirect to  page
-       
+
   }
 
 if($output==$a2)
@@ -121,6 +137,20 @@ if($output==$a2)
 
     $sql_addAutoPri = "UPDATE Prescription SET  DiseaseID = '$disease2' WHERE PrescriptionID = '$last_id2' " ;       
        mysqli_query($db, $sql_addAutoPri);
+
+
+       $sql_allDrug = "SELECT Drug.DrugName FROM Drug 
+       INNER JOIN Symphtom ON Drug.DrugID = Symphtom.DrugID 
+       INNER JOIN DiseaseHasSymphtom ON DiseaseHasSymphtom.SymphtomID = Symphtom.SymphtomID 
+       WHERE DiseaseHasSymphtom.DiseaseID = '$disease2'";
+       $result_allDrug = mysqli_query($db, $sql_allDrug);
+
+      while($row = mysqli_fetch_array($result_allDrug, MYSQLI_ASSOC))
+       {        
+          $outputDrug .= $row['DrugName'] . '<br>';
+    
+       }
+
        header("location: mailAutoReults.php");//redirect to  page
 }
 
@@ -129,6 +159,19 @@ if($output==$a3)
 
     $sql_addAutoPri = "UPDATE Prescription SET  DiseaseID = '$disease3' WHERE PrescriptionID = '$last_id2' " ;       
        mysqli_query($db, $sql_addAutoPri);
+
+       $sql_allDrug = "SELECT Drug.DrugName FROM Drug 
+       INNER JOIN Symphtom ON Drug.DrugID = Symphtom.DrugID 
+       INNER JOIN DiseaseHasSymphtom ON DiseaseHasSymphtom.SymphtomID = Symphtom.SymphtomID 
+       WHERE DiseaseHasSymphtom.DiseaseID = '$disease3'";
+       $result_allDrug = mysqli_query($db, $sql_allDrug);
+
+      while($row = mysqli_fetch_array($result_allDrug, MYSQLI_ASSOC))
+       {        
+          $outputDrug .= $row['DrugName'] . '<br>';
+    
+       }
+
        header("location: mailAutoReults.php");//redirect to  page
 
   }
@@ -138,6 +181,19 @@ if($output==$a3)
 
     $sql_addAutoPri = "UPDATE Prescription SET  DiseaseID = '$disease4' WHERE PrescriptionID = '$last_id2' " ;       
        mysqli_query($db, $sql_addAutoPri);
+
+       $sql_allDrug = "SELECT Drug.DrugName FROM Drug 
+       INNER JOIN Symphtom ON Drug.DrugID = Symphtom.DrugID 
+       INNER JOIN DiseaseHasSymphtom ON DiseaseHasSymphtom.SymphtomID = Symphtom.SymphtomID 
+       WHERE DiseaseHasSymphtom.DiseaseID = '$disease4'";
+       $result_allDrug = mysqli_query($db, $sql_allDrug);
+
+      while($row = mysqli_fetch_array($result_allDrug, MYSQLI_ASSOC))
+       {        
+          $outputDrug .= $row['DrugName'] . '<br>';
+    
+       }
+
        header("location: mailAutoReults.php");//redirect to  page
 
   }
@@ -147,12 +203,31 @@ if($output==$a3)
 
     $sql_addAutoPri = "UPDATE Prescription SET  DiseaseID = '$disease5' WHERE PrescriptionID = '$last_id2' " ;       
        mysqli_query($db, $sql_addAutoPri);
+       $sql_allDrug = "SELECT Drug.DrugName FROM Drug 
+       INNER JOIN Symphtom ON Drug.DrugID = Symphtom.DrugID 
+       INNER JOIN DiseaseHasSymphtom ON DiseaseHasSymphtom.SymphtomID = Symphtom.SymphtomID 
+       WHERE DiseaseHasSymphtom.DiseaseID = '$disease5'";
+       $result_allDrug = mysqli_query($db, $sql_allDrug);
+
+      while($row = mysqli_fetch_array($result_allDrug, MYSQLI_ASSOC))
+       {        
+          $outputDrug .= $row['DrugName'] . '<br>';
+    
+       }
+
        header("location: mailAutoReults.php");//redirect to  page
 
   }
 
 	 echo '<p> output: <br>' .$output. '</p>';
 
+     echo '<p> output: <br>' .$outputSym. '</p>';
+          echo '<p> output: <br>' .$outputDrug. '</p>';
+
+
+   $_SESSION['output'] = $output;
+   $_SESSION['description'] = $outputSym;
+   $_SESSION['outputDrug'] = $outputDrug;
 }
 
 else
@@ -171,10 +246,7 @@ else
 
 }
 
-// $_SESSION['last_id'] = $last_id;
-
 }
-// $db->close();
 
 ?>
 

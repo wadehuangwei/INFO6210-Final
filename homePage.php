@@ -89,24 +89,24 @@ if (!isset($_SESSION['username'])) {
 			<div class="item active">
 				<img src="c1.jpg">
 				<div class="carousel-caption">
-					<h3>Health Record</h3>
-					<h3><a href="healthRecords.php"  class="label label-primary" >Find More</a></h3>
+<!-- 					<h3>Health Record</h3>
+ -->					<h3><a href="healthRecords.php"  class="label label-primary" >Find More</a></h3>
 				</div>
 			</div><!-- End Item -->
 
 			<div class="item">
 				<img src="c2.jpg">
 				<div class="carousel-caption">
-					<h3>My Medical Requests</h3>
-					<h3><a href="requestRecords.php"  class="label label-primary" >Find More</a></h3>
+<!-- 					<h3>My Medical Requests</h3>
+ -->					<h3><a href="requestRecords.php"  class="label label-primary" >Find More</a></h3>
 				</div>
 			</div><!-- End Item -->
 
 			<div class="item">
 				<img src="c1.jpg">
 				<div class="carousel-caption">
-					<h3>Initiate a Medical Request</h3>
-					<h3><a href="request3.php"  class="label label-primary" >Find More</a></h3>
+<!-- 					<h3>Initiate a Medical Request</h3>
+ -->					<h3><a href="Department.php"  class="label label-primary" >Find More</a></h3>
 
 				</div>
 			</div><!-- End Item -->
@@ -114,6 +114,7 @@ if (!isset($_SESSION['username'])) {
 			<div class="item">
 				<img src="c2.jpg">
 				<div class="carousel-caption">
+				 <h3><a href="aboutUs.html"  class="label label-primary" >Find More</a></h3>
 				</div>
 			</div><!-- End Item -->
 
@@ -137,7 +138,7 @@ if (!isset($_SESSION['username'])) {
 				<div class="col-sm-8 col-sm-offset-2 text-center">
 					<h1>What is IHGS?</h1>
 					<br>
-					<p class="lead">Bootstrap is a free collection of tools for creating websites and web applications. It contains HTML and CSS-based design templates for typography, forms, buttons, navigation and other interface components, as well as optional JavaScript extensions. It is the No.1 project on GitHub with 65,000+ stars and 23,800 forks (as of March 2014) [1] and has been used by NASA and MSNBC, among many others..</p>
+					<p class="lead">IHGS is a free collection of tools for creating websites and web applications. It contains HTML and CSS-based design templates for typography, forms, buttons, navigation and other interface components, as well as optional JavaScript extensions. It is the No.1 project on GitHub with 65,000+ stars and 23,800 forks (as of March 2014) [1] and has been used by NASA and MSNBC, among many others..</p>
 					<br> 
 					<i style="font-size:120px" class="fa fa-camera fa-5x"></i>
 				</div>

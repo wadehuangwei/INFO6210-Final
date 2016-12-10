@@ -212,6 +212,11 @@ function GetDrivingDistance($lat1, $lat2, $long1, $long2)
 		</div>
 	</div>
 
+	<!-- <div class="container">
+	<img src="LOGO-web.jpg" alt="Avatar" height="200" width="40%">
+    </div> -->
+
+
 	<div class="container">
 
 		<div class="col-md-3">
